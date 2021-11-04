@@ -14,10 +14,10 @@ import com.projetoPI.SystemRod.repositories.CidadeRepository;
 public class CidadeService {
 	
 	@Autowired
-	private CidadeRepository repository;
+	private CidadeRepository cidadeRepository;
 	
 	public List<CidadeDTO> findAll(){
-		List<Cidade> result = repository.findAll();
+		List<Cidade> result = cidadeRepository.findAll();
 		return result.stream().map(x -> new CidadeDTO(x)).collect(Collectors.toList());
 	}
 
