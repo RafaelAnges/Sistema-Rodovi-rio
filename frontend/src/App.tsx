@@ -1,14 +1,17 @@
-import React from 'react';
-import logo from './logo.svg';
+
 import './App.css';
+import Footer from './components/Footer';
+import ListCidadeComponent from './components/ListCidadeComponent';
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <h1>Olá Mundo!</h1>
-      </header>
+    <>
+    <div className="container">
+      <ListCidadeComponent/>
+      
     </div>
+    <Footer/>
+    </>
   );
 }
 
