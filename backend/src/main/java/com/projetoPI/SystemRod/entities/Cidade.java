@@ -25,7 +25,8 @@ public class Cidade {
 		
 	}
 
-	public Cidade( String cidade, String uf) {
+	public Cidade(Long id, String cidade, String uf) {
+		this.id = id;
 		this.cidade = cidade;
 		this.uf = uf;
 	}
