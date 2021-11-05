@@ -30,12 +30,12 @@ public class VeiculoDTO implements Serializable {
 	}
 	
 	public VeiculoDTO(Veiculo entity) {
-		this.id = entity.getId();
-		this.dataCompra = entity.getDataCompra();
-		this.placa = entity.getPlaca();
-		this.motorista = entity.getMotorista();
-		this.modelo = entity.getModelo();
-		this.poltrona = entity.getPoltrona();
+		id = entity.getId();
+		dataCompra = entity.getDataCompra();
+		placa = entity.getPlaca();
+		motorista = entity.getMotorista();
+		modelo = entity.getModelo();
+		poltrona = entity.getPoltrona();
 	}
 
 	public Long getId() {
