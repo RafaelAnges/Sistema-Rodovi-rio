@@ -40,9 +40,21 @@
 .footer {
   position: absolute;
   bottom: 0;
-  width: 100%;
+  width: 73%;
   height: 50px;
   background-color: black;
   text-align: center;
   color: white;
+}
+
+.btn-primary{
+width: 200px;
+
+}
+.space{
+  margin: 5px;
+}
+
+.space2{
+  margin-top: 10px;
 }

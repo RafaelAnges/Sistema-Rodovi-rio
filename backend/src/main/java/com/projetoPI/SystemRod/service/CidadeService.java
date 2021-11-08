@@ -20,5 +20,7 @@ public class CidadeService {
 		List<Cidade> result = cidadeRepository.findAll();
 		return result.stream().map(x -> new CidadeDTO(x)).collect(Collectors.toList());
 	}
+	
+
 
 }

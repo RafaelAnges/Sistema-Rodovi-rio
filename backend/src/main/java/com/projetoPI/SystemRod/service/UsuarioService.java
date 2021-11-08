@@ -13,8 +13,10 @@ import com.projetoPI.SystemRod.repositories.UsuarioRepository;
 @Service
 public class UsuarioService {
 	
+	
 	@Autowired
 	private UsuarioRepository usuarioRepository;
+	
 	
 	public List<UsuarioDTO> findAll(){
 		List<Usuario> result = usuarioRepository.findAll();
