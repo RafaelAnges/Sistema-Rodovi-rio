@@ -1,15 +1,17 @@
 package com.projetoPI.SystemRod.repositories;
 
+
+
+import java.util.Optional;
+
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import com.projetoPI.SystemRod.entities.Usuario;
 
 public interface UsuarioRepository extends JpaRepository<Usuario, Long> {
 	
-	Usuario autenticar(String login, String senha);
+	boolean existsByLogin(String login);
 	
-	Usuario salvarUsuario(Usuario usuario);
-	
-	void validarEmail(String email);
+	Optional<Usuario> findByLogin(String login);
 
 }

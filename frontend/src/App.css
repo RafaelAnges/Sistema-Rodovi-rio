@@ -58,3 +58,23 @@ width: 200px;
 .space2{
   margin-top: 10px;
 }
+.btn-danger{
+   margin-left: 10px;
+   margin-right: -80px;
+}
+
+.col-md-6-1{
+  padding: 100px;
+  position: relative;
+  left: -50px;
+}
+
+.form-group{
+  margin-top: 10px;
+}
+
+button{
+  margin-top: 10px;
+}
+
+

@@ -1,6 +1,6 @@
 
 import React, { Component } from 'react'
-import CidadeService from '../services/CidadeService';
+import CidadeService from '../../services/CidadeService';
 
 class ListCidadeComponent extends Component {
     
@@ -13,11 +13,21 @@ class ListCidadeComponent extends Component {
 
         }
         this.addCidade = this.addCidade.bind(this);
+        this.editCidade = this.editCidade.bind(this);
+        this.deleteCidade = this.deleteCidade.bind(this);
        
     }
 
-    
+    deleteCidade(id){
+        CidadeService.deleteCidade(id).then( res => {
+            this.setState({cidades: this.state.cidades.filter(cidade => cidade.id !== id)});
+        });
+    }
 
+    editCidade(id){
+        this.props.history.push(`/update-cidade/${id}`);
+
+    }
     componentDidMount(){
         CidadeService.getCidades().then((res) => {
             this.setState({ cidades: res.data});
@@ -60,6 +70,11 @@ class ListCidadeComponent extends Component {
                                     <tr key = {cidade.id}>
                                         <td> {cidade.cidade} </td>
                                         <td> {cidade.uf} </td>
+                                        <td>
+                                            <button onClick = { () => this.editCidade(cidade.id)} className="btn btn-info" >Alterar</button>
+                                            <button onClick = { () => this.deleteCidade(cidade.id)} className="btn btn-danger" >Delete</button>
+                                        
+                                        </td>
 
                                     </tr>
                                 )

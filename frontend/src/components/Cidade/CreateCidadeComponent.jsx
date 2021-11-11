@@ -1,6 +1,7 @@
 
 import React, { Component } from 'react'
-import CidadeService from '../services/CidadeService';
+import CidadeService from '../../services/CidadeService';
+
 class CreateCidadeComponent extends Component {
     constructor(props){
         super(props)
@@ -47,7 +48,7 @@ class CreateCidadeComponent extends Component {
               <div className="container">
                   <div className="row">
                       <div className="card col-md-6 offset-md-3 offset-md-3">
-                          <h3 className="text-center">Add Cidade</h3>
+                          <h3 className="text-center">Cadastrar Cidade</h3>
                           <div className="card-body">
                               <form>
                                   <div className="form-group">
