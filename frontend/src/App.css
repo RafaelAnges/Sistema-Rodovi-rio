@@ -63,11 +63,10 @@ width: 200px;
    margin-right: -80px;
 }
 
-.col-md-6-1{
-  padding: 100px;
-  position: relative;
-  left: -50px;
+.cent{
+  margin-top: 50px;
 }
+
 
 .form-group{
   margin-top: 10px;
