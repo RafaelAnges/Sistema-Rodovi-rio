@@ -1,56 +1,20 @@
-.App {
-  text-align: center;
+body{
+  background-color: rgb(178, 223, 235);
+}
+th{
+  background-color:rgb(28, 101, 211) !important;
+  
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
-}
-
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
-}
-
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
-}
-
-.App-link {
-  color: #61dafb;
-}
-
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
-}
-
-.footer {
-  position: absolute;
-  bottom: 0;
-  width: 73%;
-  height: 50px;
-  background-color: black;
-  text-align: center;
-  color: white;
+td{
+  background-color: white !important;
 }
 
 .btn-primary{
 width: 200px;
 
 }
+
 .space{
   margin: 5px;
 }
@@ -63,17 +27,100 @@ width: 200px;
    margin-right: -80px;
 }
 
+
 .cent{
   margin-top: 50px;
 }
 
 
 .form-group{
-  margin-top: 10px;
+  margin: 10px;
 }
 
 button{
-  margin-top: 10px;
+  margin: 10px;
+}
+
+th{
+  background-color:red;
+}
+
+.passagem{
+  color: aliceblue;
+  background-color: rgb(35, 101, 199);
+  margin: 70px;
+  width: 20%;
+  height: 100px;
+  border: 3px solid rgb(34, 31, 29);
+}
+
+.table{
+  border: 2px solid black;
+}
+.border1{
+  border: 2px solid black;
+  
+}
+
+.center1{
+  margin: 200px;
+  margin-top: 50px;
+}
+
+
+/* menu principal*/
+
+
+.cor{
+  background-color: rgb(37, 118, 223);
+}
+
+.topbar{
+  width: 100%;
+  height: 70px;
+}
+
+.topbarWrapper{
+  height: 100%;
+  padding: 0px 20px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.logo{
+  font-weight: bold;
+  font-size: 30px;
+  color: white;
+  cursor: pointer;
+}
+
+
+
+.topRight{
+  display: flex;
+  align-items: center;
+}
+
+.topBarIconContainer {
+  position: relative;
+  cursor: pointer;
+  margin-right: 10px;
+  color: greenyellow;
+}
+
+
+
+.topAvatar{
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  cursor: pointer;
+}
+
+.cone{
+  color: greenyellow;
+  margin-left: 10px;
 }
 
 

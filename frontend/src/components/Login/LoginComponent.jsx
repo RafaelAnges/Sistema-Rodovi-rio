@@ -1,3 +1,4 @@
+import axios from 'axios';
 import React, { Component } from 'react'
 import FormGroup from './FormGroup';
 import Passo from './Passo';
@@ -9,26 +10,39 @@ class LoginComponent extends Component {
 
         this.state = {
             login: '',
-            senha: ''
-
+            senha: '',
+            mensagemErro: null
 
         }
     }
 
-    entrar = () => {
-        console.log('Login: ', this.state.login)
-        console.log('Senha: ', this.state.senha)
+    entrar = async () => {
+        const response = await axios.post('http://localhost:8080/api/v1/usuarios/autenticar', {
+            login: this.state.login,
+            senha: this.state.senha
+        }).then( response => {
+            this.props.history.push('/usuarios');
+            console.log(response)
+        }).catch( erro => {
+            this.setState({mensagemErro: erro.response.data})
+        })
+
+        
     }
 
     render() {
         return (
-            <div className="container">
+            
+            
+
+      <div className="container">
                 <div className="row">
                     <div className="col-md-6 offset-md-3 offset-md-3" >
                         <div className="cent">
                         <div className="bs-docs-section">
                             <Passo title="Login">
                                 <div className="row">
+                                    <span>{this.state.mensagemErro}</span>
                                     <div className="col-lg-12">
                                         <div className="bs-component">
                                             <fieldset>
