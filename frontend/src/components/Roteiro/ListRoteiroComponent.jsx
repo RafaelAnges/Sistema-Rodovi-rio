@@ -1,52 +1,50 @@
 
 import React, { Component } from 'react'
-import CidadeService from '../../services/CidadeService';
+import RoteiroService from '../../services/RoteiroService';
 
-class CreateCidadeComponent extends Component {
+class ListRoteiroComponent extends Component {
+    
     constructor(props){
         super(props)
 
         this.state = {
-            cidade: '',
-            uf: ''
+            roteiros: []
+
 
         }
-       this.changeCidadeHandler = this.changeCidadeHandler.bind(this);
-       this.changeUfHandler = this.changeUfHandler.bind(this);
-       this.saveCidade = this.saveCidade.bind(this);
-    
+        this.addRoteiro = this.addRoteiro.bind(this);
+        this.editRoteiro = this.editRoteiro.bind(this);
+        this.deleteRoteiro = this.deleteRoteiro.bind(this);
     }
 
-    saveCidade = (e) => {
-        e.preventDefault();
-        let cidade = {cidade: this.state.cidade, uf: this.state.uf};
-        console.log('cidade => ' + JSON.stringify(cidade));
-
-        
-        CidadeService.createCidade(cidade).then(res =>{
-            this.props.history.push('/cidades');
+    deleteRoteiro(id){
+        RoteiroService.deleteRoteiro(id).then( res => {
+            this.setState({roteiros: this.state.roteiros.filter(roteiro => roteiro.id !== id)});
         });
     }
 
-   
+    editRoteiro(id){
+        this.props.history.push(`/update-roteiro/${id}`);
 
-    changeCidadeHandler= (event) => {
-        this.setState({cidade: event.target.value});
+    }
+    componentDidMount(){
+        RoteiroService.getRoteiros().then((res) => {
+            this.setState({ roteiros: res.data});
+            
+
+        })
     }
 
-    changeUfHandler= (event) => {
-        this.setState({uf: event.target.value});
-    }
 
-    cancel(){
-        this.props.history.push('/cidades');
+    addRoteiro(){
+        this.props.history.push('/add-roteiro');
     }
+    
 
     render(){
-        
         return(
             <div>
-                <div >
+<div >
         <div className="cor">
           <div className="topbar">
             <div className="topbarWrapper">
@@ -64,36 +62,54 @@ class CreateCidadeComponent extends Component {
         </div>
       </div>
 
-      
-              <div className="container">
-                  <div className="row">
-                      <div className=" col-md-6 offset-md-3 offset-md-3">
-                          <h3 className="text-center">Cadastrar Cidade</h3>
-                          <div className="card-body">
-                              <form className="border1">
-                                  <div className="form-group">
-                                      <label>Cidade: </label>
-                                      <input placeholder="Cidade" name="cidade" className="form-control"
-                                       value={this.state.cidade} onChange={this.changeCidadeHandler}/>
-                                  </div>
+      <div className="container">
+                <h2 className="text-center">Pesquisar Roteiros</h2>
+                <div className="row">
+                    
+                    <button className="btn btn-primary" onClick={this.addRoteiro}>
+                        Cadastrar Roteiro
+                    </button>
+                    <div className="space"></div>
+                    </div>
+                    <div className="row">
+                    <table className="table table-striped table-bordered">
 
-                                  <div className="form-group">
-                                      <label>Uf: </label>
-                                      <input placeholder="Uf" name="uf" className="form-control"
-                                       value={this.state.uf} onChange={this.changeUfHandler}/>
-                                  </div>
-                                  <div className="space2"></div>
-                                  <button className="btn btn-success" onClick={this.saveCidade}>Confirmar</button>
-                                  <button className="btn btn-danger" onClick={this.cancel.bind(this)} style={{marginLeft: "10px"}}>Cancelar</button>
-                              </form>
-                          </div>
-                      </div>
+                        <thead>
+                            <tr>
+                                <th>Cidade</th>
+                                <th>Modelo</th>
+                                <th>Poltrona</th>
+                                <th>Opções</th>
+                            </tr>
+                        </thead>
 
-                  </div>
-              </div>
+                        <tbody>
+                            {
+                                this.state.roteiros.map(
+                                    roteiro =>
+                                    <tr key = {roteiro.id}>
+                                        <td> {roteiro.cidade} </td>
+                                        <td> {roteiro.modelo} </td>
+                                        <td> {roteiro.poltrona} </td>
+                                        <td>
+                                            <button onClick = { () => this.editRoteiro(roteiro.id)} className="btn btn-info" >Alterar</button>
+                                            <button onClick = { () => this.deleteRoteiro(roteiro.id)} className="btn btn-danger" >Delete</button>
+                                        
+                                        </td>
+
+                                    </tr>
+                                )
+                            }
+
+
+                        </tbody>
+                    </table>
+                </div>
+                </div>
+            
             </div>
         )
     }
 }
 
-export default CreateCidadeComponent
+export default ListRoteiroComponent

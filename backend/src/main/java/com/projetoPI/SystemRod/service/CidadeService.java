@@ -23,11 +23,14 @@ public class CidadeService {
 		return result.stream().map(x -> new CidadeDTO(x)).collect(Collectors.toList());
 	}
 	
+
+	
 	@Transactional
 	public Cidade salvarCidade(Cidade cidade) {
 		validar(cidade);
 		return cidadeRepository.save(cidade);
 	}
+	
 	
 	public void validar(Cidade cidade) {
 		if(cidade.getCidade() == null || cidade.getCidade().trim().equals("")) {

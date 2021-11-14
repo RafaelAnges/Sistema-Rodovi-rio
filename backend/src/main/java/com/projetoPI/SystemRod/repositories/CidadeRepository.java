@@ -6,4 +6,6 @@ import com.projetoPI.SystemRod.entities.Cidade;
 
 public interface CidadeRepository extends JpaRepository<Cidade, Long> {
 
+
+	
 }

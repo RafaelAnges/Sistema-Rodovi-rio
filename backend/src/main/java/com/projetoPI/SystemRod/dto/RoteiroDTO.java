@@ -1,32 +1,34 @@
 package com.projetoPI.SystemRod.dto;
 
+import java.io.Serializable;
+
 import com.projetoPI.SystemRod.entities.Roteiro;
 
-public class RoteiroDTO {
+public class RoteiroDTO implements Serializable{
+	private static final long serialVersionUID = 1L;
 
 	private Long id;
 	
-	private CidadeDTO cidade;
-	private VeiculoDTO modelo;
-	private VeiculoDTO poltrona;
+	private String cidade;
+	private String modelo;
+	private Integer poltrona;
 	
 	public RoteiroDTO() {
 		
 	}
 
-	public RoteiroDTO(Long id, CidadeDTO cidade, VeiculoDTO modelo, VeiculoDTO poltrona) {
+	public RoteiroDTO(Long id, String cidade, String modelo, Integer poltrona) {
 		this.id = id;
 		this.cidade = cidade;
 		this.modelo = modelo;
 		this.poltrona = poltrona;
 	}
 	
-	
 	public RoteiroDTO(Roteiro entity) {
-		id = entity.getId();
-		cidade = new CidadeDTO(entity.getCidade());
-		modelo = new VeiculoDTO(entity.getModelo());
-		poltrona = new VeiculoDTO(entity.getPoltrona());
+		this.id = entity.getId();
+		this.cidade = entity.getCidade();
+		this.modelo = entity.getModelo();
+		this.poltrona = entity.getPoltrona();
 	}
 
 	public Long getId() {
@@ -37,29 +39,34 @@ public class RoteiroDTO {
 		this.id = id;
 	}
 
-	public CidadeDTO getCidade() {
+	public String getCidade() {
 		return cidade;
 	}
 
-	public void setCidade(CidadeDTO cidade) {
+	public void setCidade(String cidade) {
 		this.cidade = cidade;
 	}
 
-	public VeiculoDTO getModelo() {
+	public String getModelo() {
 		return modelo;
 	}
 
-	public void setModelo(VeiculoDTO modelo) {
+	public void setModelo(String modelo) {
 		this.modelo = modelo;
 	}
 
-	public VeiculoDTO getPoltrona() {
+	public Integer getPoltrona() {
 		return poltrona;
 	}
 
-	public void setPoltrona(VeiculoDTO poltrona) {
+	public void setPoltrona(Integer poltrona) {
 		this.poltrona = poltrona;
 	}
+	
+	
+	
+
+	
 	
 	
 	

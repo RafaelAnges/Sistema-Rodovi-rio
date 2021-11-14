@@ -13,6 +13,8 @@ import ListUsuarioComponent from './components/Usuario/ListUsuarioComponent';
 import CreateUsuarioComponent from './components/Usuario/CreateUsuarioComponent';
 import UpdateUsuarioComponent from './components/Usuario/UpdateUsuarioComponent';
 import MenuComponent from './components/Login/MenuComponent';
+import CreateRoteiroComponent from './components/Roteiro/CreateRoteiroComponent';
+import ListRoteiroComponent from './components/Roteiro/ListRoteiroComponent';
 
 
 function App() {
@@ -30,6 +32,8 @@ function App() {
   
             <Switch className="container">
               <Route path="/menu" component={MenuComponent} />
+              <Route path="/add-roteiro" exact component={CreateRoteiroComponent} />
+              <Route path="/roteiros" exact component={ListRoteiroComponent} />
 
             </Switch>
             <Switch>

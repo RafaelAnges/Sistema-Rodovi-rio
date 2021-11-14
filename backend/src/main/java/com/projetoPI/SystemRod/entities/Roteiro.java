@@ -1,11 +1,10 @@
 package com.projetoPI.SystemRod.entities;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 @Entity
@@ -16,23 +15,23 @@ public class Roteiro {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	
-	@OneToOne
-	@JoinColumn(name = "cidade_c")
-	private Cidade cidade;
 	
-	@OneToOne
-	@JoinColumn(name = "modelo_v")
-	private Veiculo modelo;
+	@Column(name = "cidade_c")
+	private String cidade;
 	
-	@OneToOne
-	@JoinColumn(name = "poltrona_v")
-	private Veiculo poltrona;
+	
+	@Column(name = "modelo_v")
+	private String modelo;
+	
+	
+	@Column(name = "poltrona_v")
+	private Integer poltrona;
 	
 	public Roteiro() {
 		
 	}
 
-	public Roteiro(Long id, Cidade cidade, Veiculo modelo, Veiculo poltrona) {
+	public Roteiro(Long id, String cidade, String modelo, Integer poltrona) {
 		this.id = id;
 		this.cidade = cidade;
 		this.modelo = modelo;
@@ -47,30 +46,37 @@ public class Roteiro {
 		this.id = id;
 	}
 
-	public Cidade getCidade() {
+	public String getCidade() {
 		return cidade;
 	}
 
-	public void setCidade(Cidade cidade) {
+	public void setCidade(String cidade) {
 		this.cidade = cidade;
 	}
 
-	public Veiculo getModelo() {
+	public String getModelo() {
 		return modelo;
 	}
 
-	public void setModelo(Veiculo modelo) {
+	public void setModelo(String modelo) {
 		this.modelo = modelo;
 	}
 
-	public Veiculo getPoltrona() {
+	public Integer getPoltrona() {
 		return poltrona;
 	}
 
-	public void setPoltrona(Veiculo poltrona) {
+	public void setPoltrona(Integer poltrona) {
 		this.poltrona = poltrona;
 	}
 	
 	
 
+	
+	
+	
+	
+	
+	
+	
 }

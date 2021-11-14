@@ -39,6 +39,8 @@ public class CidadeController {
 		List<CidadeDTO> list = service.findAll();
 		return ResponseEntity.ok(list);
 	}
+	
+	
 
 	@PostMapping
 	public ResponseEntity createCidade(@RequestBody Cidade cidade) {
