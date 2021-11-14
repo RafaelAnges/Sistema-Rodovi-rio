@@ -15,6 +15,9 @@ import UpdateUsuarioComponent from './components/Usuario/UpdateUsuarioComponent'
 import MenuComponent from './components/Login/MenuComponent';
 import CreateRoteiroComponent from './components/Roteiro/CreateRoteiroComponent';
 import ListRoteiroComponent from './components/Roteiro/ListRoteiroComponent';
+import ListVeiculoComponent from './components/Veiculo/ListVeiculoComponent';
+import CreateVeiculoComponent from './components/Veiculo/CreateVeiculoComponent';
+import UpdateVeiculoComponent from './components/Veiculo/UpdateVeiculoComponent';
 
 
 function App() {
@@ -34,13 +37,20 @@ function App() {
               <Route path="/menu" component={MenuComponent} />
               <Route path="/add-roteiro" exact component={CreateRoteiroComponent} />
               <Route path="/roteiros" exact component={ListRoteiroComponent} />
-
+              
             </Switch>
             <Switch>
               <Route path="/cidade" exact component={ListCidadeComponent} />
               <Route path="/cidades" component={ListCidadeComponent} />
               <Route path="/add-cidade" component={CreateCidadeComponent} />
               <Route path="/update-cidade/:id" component={UpdateCidadeComponent} />
+            </Switch>
+
+            <Switch>
+              <Route path="/veiculo" exact component={ListVeiculoComponent} />
+              <Route path="/veiculos" component={ListVeiculoComponent} />
+              <Route path="/add-veiculo" component={CreateVeiculoComponent} />
+              <Route path="/update-veiculo/:id" component={UpdateVeiculoComponent} />
             </Switch>
 
             <Switch>

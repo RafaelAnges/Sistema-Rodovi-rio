@@ -21,7 +21,7 @@ class LoginComponent extends Component {
             login: this.state.login,
             senha: this.state.senha
         }).then( response => {
-            this.props.history.push('/usuarios');
+            this.props.history.push('/menu');
             console.log(response)
         }).catch( erro => {
             this.setState({mensagemErro: erro.response.data})

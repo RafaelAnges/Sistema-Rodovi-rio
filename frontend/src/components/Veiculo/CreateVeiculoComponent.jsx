@@ -1,50 +1,70 @@
 
 import React, { Component } from 'react'
-import RoteiroService from '../../services/RoteiroService';
+import VeiculoService from '../../services/VeiculoService';
 
-class ListRoteiroComponent extends Component {
-    
+class CreateVeiculoComponent extends Component {
     constructor(props){
         super(props)
 
         this.state = {
-            roteiros: []
-
+            placa: '',
+            dataCompra: '',
+            motorista: '',
+            modelo: '',
+            poltrona: ''
 
         }
-        this.addRoteiro = this.addRoteiro.bind(this);
-        this.editRoteiro = this.editRoteiro.bind(this);
-        this.deleteRoteiro = this.deleteRoteiro.bind(this);
+       this.changePlacaHandler = this.changePlacaHandler.bind(this);
+       this.changeDataCompraHandler = this.changeDataCompraHandler.bind(this);
+       this.changeMotoristaHandler = this.changeMotoristaHandler.bind(this);
+       this.changeModeloHandler = this.changeModeloHandler.bind(this);
+       this.changePoltronaHandler = this.changePoltronaHandler.bind(this);
+       this.saveVeiculo = this.saveVeiculo.bind(this);
+    
     }
 
-    deleteRoteiro(id){
-        RoteiroService.deleteRoteiro(id).then( res => {
-            this.setState({roteiros: this.state.roteiros.filter(roteiro => roteiro.id !== id)});
+    saveVeiculo = (e) => {
+        e.preventDefault();
+        let veiculo = {placa: this.state.placa, dataCompra: this.state.dataCompra, motorista: this.state.motorista, modelo: this.state.modelo, poltrona: this.state.poltrona };
+        console.log('veiculo => ' + JSON.stringify(veiculo));
+
+        
+        VeiculoService.createVeiculo(veiculo).then(res =>{
+            this.props.history.push('/veiculos');
         });
     }
 
-    editRoteiro(id){
-        this.props.history.push(`/update-roteiro/${id}`);
+   
 
-    }
-    componentDidMount(){
-        RoteiroService.getRoteiros().then((res) => {
-            this.setState({ roteiros: res.data});
-            
-
-        })
+    changePlacaHandler= (event) => {
+        this.setState({placa: event.target.value});
     }
 
-
-    addRoteiro(){
-        this.props.history.push('/add-roteiro');
+    changeDataCompraHandler= (event) => {
+        this.setState({dataCompra: event.target.value});
     }
-    
+
+    changeMotoristaHandler= (event) => {
+        this.setState({motorista: event.target.value});
+    }
+
+    changeModeloHandler= (event) => {
+        this.setState({modelo: event.target.value});
+    }
+
+    changePoltronaHandler= (event) => {
+        this.setState({poltrona: event.target.value});
+    }
+
+    cancel(){
+        this.props.history.push('/veiculos');
+    }
 
     render(){
+        
         return(
             <div>
-<div >
+                <div >
         <div className="cor">
           <div className="topbar">
             <div className="topbarWrapper">
@@ -62,54 +82,54 @@ class ListRoteiroComponent extends Component {
         </div>
       </div>
 
-      <div className="container">
-                <h2 className="text-center">Pesquisar Roteiros</h2>
-                <div className="row">
-                    
-                    <button className="btn btn-primary" onClick={this.addRoteiro}>
-                        Cadastrar Roteiro
-                    </button>
-                    <div className="space"></div>
-                    </div>
-                    <div className="row">
-                    <table className="table table-striped table-bordered">
+      
+              <div className="container">
+                  <div className="row">
+                      <div className=" col-md-6 offset-md-3 offset-md-3">
+                          <h3 className="text-center">Cadastrar Veiculo</h3>
+                          <div className="card-body">
+                              <form className="border1">
+                                  <div className="form-group">
+                                      <label>Placa: </label>
+                                      <input placeholder="Placa" name="placa" className="form-control"
+                                       value={this.state.placa} onChange={this.changePlacaHandler}/>
+                                  </div>
 
-                        <thead>
-                            <tr>
-                                <th>Cidade</th>
-                                <th>Modelo</th>
-                                <th>Poltrona</th>
-                                <th>Opções</th>
-                            </tr>
-                        </thead>
+                                  <div className="form-group">
+                                      <label>DataCompra: </label>
+                                      <input placeholder="DataCompra" name="dataCompra" className="form-control"
+                                       value={this.state.dataCompra} onChange={this.changeDataCompraHandler}/>
+                                  </div>
 
-                        <tbody>
-                            {
-                                this.state.roteiros.map(
-                                    roteiro =>
-                                    <tr key = {roteiro.id}>
-                                        <td> {roteiro.cidade} </td>
-                                        <td> {roteiro.modelo} </td>
-                                        <td> {roteiro.poltrona} </td>
-                                        <td>
-                                            
-                                            <button onClick = { () => this.deleteRoteiro(roteiro.id)} className="btn btn-danger" >Delete</button>
-                                        
-                                        </td>
+                                  <div className="form-group">
+                                      <label>Motorista: </label>
+                                      <input placeholder="Motorista" name="motorista" className="form-control"
+                                       value={this.state.motorista} onChange={this.changeMotoristaHandler}/>
+                                  </div>
 
-                                    </tr>
-                                )
-                            }
+                                  <div className="form-group">
+                                      <label>Modelo: </label>
+                                      <input placeholder="Modelo" name="modelo" className="form-control"
+                                       value={this.state.modelo} onChange={this.changeModeloHandler}/>
+                                  </div>
 
+                                  <div className="form-group">
+                                      <label>Poltrona: </label>
+                                      <input placeholder="Poltrona" name="poltrona" className="form-control"
+                                       value={this.state.poltrona} onChange={this.changePoltronaHandler}/>
+                                  </div>
+                                  <div className="space2"></div>
+                                  <button className="btn btn-success" onClick={this.saveVeiculo}>Confirmar</button>
+                                  <button className="btn btn-danger" onClick={this.cancel.bind(this)} style={{marginLeft: "10px"}}>Cancelar</button>
+                              </form>
+                          </div>
+                      </div>
 
-                        </tbody>
-                    </table>
-                </div>
-                </div>
-            
+                  </div>
+              </div>
             </div>
         )
     }
 }
 
-export default ListRoteiroComponent
+export default CreateVeiculoComponent
