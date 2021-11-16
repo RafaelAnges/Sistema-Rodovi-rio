@@ -1,84 +1,51 @@
 
 import React, { Component } from 'react'
-import UsuarioService from '../../services/UsuarioService';
+import PassagemService from '../../services/PassagemService';
 
-class UpdateUsuarioComponent extends Component {
+class ListPassagemComponent extends Component {
+    
     constructor(props){
         super(props)
 
         this.state = {
-            id: this.props.match.params.id,
-            nome: '',
-            cargo: '',
-            email: '',
-            login: '',
-            senha: ''
+            passagens: []
+
 
         }
-       this.changeNomeHandler = this.changeNomeHandler.bind(this);
-       this.changeCargoHandler = this.changeCargoHandler.bind(this);
-       this.changeEmailHandler = this.changeEmailHandler.bind(this);
-       this.changeLoginHandler = this.changeLoginHandler.bind(this);
-       this.changeSenhaHandler = this.changeSenhaHandler.bind(this);
-       this.updateUsuario = this.updateUsuario.bind(this);
+        this.addPassagem = this.addPassagem.bind(this);
+       // this.editUsuario = this.editUsuario.bind(this);
+        this.deletePassagem = this.deletePassagem.bind(this);
+    }
+
+    deletePassagem(id){
+        PassagemService.deletePassagem(id).then( res => {
+            this.setState({passagens: this.state.passagens.filter(passagem => passagem.id !== id)});
+        });
+    }
+
+    //editUsuario(id){
+    //    this.props.history.push(`/update-usuario/${id}`);
+
+    //}
+
+    componentDidMount(){
+        PassagemService.getPassagens().then((res) => {
+            this.setState({ passagens: res.data});
+            
+
+        })
+    }
+
+
+    addPassagem(){
+        this.props.history.push('/add-passagem');
+    }
     
-    }
-
-    componentDidMount() {
-        UsuarioService.getUsuarioById(this.state.id).then((res) => {
-            let usuario = res.data;
-            this.setState({
-                nome: usuario.nome,
-                cargo: usuario.cargo,
-                email: usuario.email,
-                login: usuario.login,
-                senha: usuario.senha
-            });
-        });
-    }
-
-    updateUsuario = (e) => {
-        e.preventDefault();
-        let usuario = {nome: this.state.nome, cargo: this.state.cargo, email: this.state.email, login: this.state.login, senha: this.state.senha};
-        console.log('usuario => ' + JSON.stringify(usuario));
-
-        
-        UsuarioService.updateUsuario(usuario, this.state.id).then(res =>{
-            this.props.history.push('/usuarios');
-        });
-    }
-
-   
-
-    changeNomeHandler= (event) => {
-        this.setState({nome: event.target.value});
-    }
-
-    changeCargoHandler= (event) => {
-        this.setState({cargo: event.target.value});
-    }
-
-    changeEmailHandler= (event) => {
-        this.setState({email: event.target.value});
-    }
-
-    changeLoginHandler= (event) => {
-        this.setState({login: event.target.value});
-    }
-
-    changeSenhaHandler= (event) => {
-        this.setState({senha: event.target.value});
-    }
-
-    cancel(){
-        this.props.history.push('/usuarios');
-    }
 
     render(){
         return(
             <div>
-                
-                <div >
+<div >
         <div className="cor">
           <div className="topbar">
             <div className="topbarWrapper">
@@ -97,55 +64,62 @@ class UpdateUsuarioComponent extends Component {
       </div>
 
       <div className="container">
+                <h2 className="text-center">Pesquisar Passagens </h2>
+                <div className="row">
+                    
+                    <button className="btn btn-primary" onClick={this.addPassagem}>
+                        Cadastrar Passagem
+                    </button>
+                    <div className="space"></div>
+                    </div>
+                    <div className="row">
+                    <table className="table table-striped table-bordered">
+
+                        <thead>
+                            <tr>
+                                <th>CidadeOrigem</th>
+                                <th>CidadeDestino</th>
+                                <th>DataSaida</th>
+                                <th>HoraSaida</th>
+                                <th>Veiculo</th>
+                                <th>Poltrona</th>
+                                <th>Valor</th>
+                                <th>Opção</th>
+                            </tr>
+                        </thead>
+
+                        <tbody>
+                            {
+                                this.state.passagens.map(
+                                    passagem =>
+                                    <tr key = {passagem.id}>
+                                        <td> {passagem.cidadeOrigem} </td>
+                                        <td> {passagem.cidadeDestino} </td>
+                                        <td> {passagem.dataSaida} </td>
+                                        <td> {passagem.horaSaida} </td>
+                                        <td> {passagem.veiculo} </td>
+                                        <td> {passagem.poltrona} </td>
+                                        <td> {passagem.valor} </td>
+                                        <td>
+                                            {/*<button onClick = { () => this.editPassagem(passagem.id)} className="btn btn-info" >Alterar</button>*/}
+
+                                            <button onClick = { () => this.deletePassagem(passagem.id)} className="btn btn-danger" >Delete</button>
+                                        
+                                        </td>
+
+                                    </tr>
+                                )
+                            }
 
 
-
-                  <div className="row">
-                      <div className="col-md-6 offset-md-3 offset-md-3">
-                          <h3 className="text-center">Aterar Usuario</h3>
-                          <div className="card-body">
-                              <form className="border1">
-                                  <div className="form-group">
-                                      <label>Nome: </label>
-                                      <input placeholder="Nome" name="nome" className="form-control"
-                                       value={this.state.nome} onChange={this.changeNomeHandler}/>
-                                  </div>
-
-                                  <div className="form-group">
-                                      <label>Cargo: </label>
-                                      <input placeholder="Cargo" name="cargo" className="form-control"
-                                       value={this.state.cargo} onChange={this.changeCargoHandler}/>
-                                  </div>
-
-                                  <div className="form-group">
-                                      <label>E-mail: </label>
-                                      <input placeholder="Email" name="email" className="form-control"
-                                       value={this.state.email} onChange={this.changeEmailHandler}/>
-                                  </div>
-
-                                  <div className="form-group">
-                                      <label>Login: </label>
-                                      <input placeholder="Login" name="login" className="form-control"
-                                       value={this.state.login} onChange={this.changeLoginHandler}/>
-                                  </div>
-
-                                  <div className="form-group">
-                                      <label>Senha: </label>
-                                      <input placeholder="Senha" name="senha" className="form-control"
-                                       value={this.state.senha} onChange={this.changeSenhaHandler}/>
-                                  </div>
-                                  <div className="space2"></div>
-                                  <button className="btn btn-success" onClick={this.updateUsuario}>Confirmar</button>
-                                  <button className="btn btn-danger" onClick={this.cancel.bind(this)} style={{marginLeft: "10px"}}>Cancelar</button>
-                              </form>
-                          </div>
-                      </div>
-
-                  </div>
-              </div>
+                        </tbody>
+                    </table>
+                </div>
+                </div>
+            
             </div>
         )
     }
 }
 
-export default UpdateUsuarioComponent
+export default ListPassagemComponent

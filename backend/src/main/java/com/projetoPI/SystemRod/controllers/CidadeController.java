@@ -54,19 +54,19 @@ public class CidadeController {
 		}
 	}
 
-	@GetMapping("/{id}")
-	public ResponseEntity<Cidade> getCidadeById(@PathVariable Long id) {
+	@GetMapping("/{id_c}")
+	public ResponseEntity<Cidade> getCidadeById_c(@PathVariable Long id_c) {
 
-		Cidade cidade = cidadeRepository.findById(id)
-				.orElseThrow(() -> new ResourceNotFoundException("Cidade não existe com id :" + id));
+		Cidade cidade = cidadeRepository.findById(id_c)
+				.orElseThrow(() -> new ResourceNotFoundException("Cidade não existe com id :" + id_c));
 		return ResponseEntity.ok(cidade);
 	}
 
-	@PutMapping("/{id}")
-	public ResponseEntity<Cidade> updateCidade(@PathVariable Long id, @RequestBody Cidade cidadeDetails) {
+	@PutMapping("/{id_c}")
+	public ResponseEntity<Cidade> updateCidade(@PathVariable Long id_c, @RequestBody Cidade cidadeDetails) {
 
-		Cidade cidade = cidadeRepository.findById(id)
-				.orElseThrow(() -> new ResourceNotFoundException("Cidade não existe com id :" + id));
+		Cidade cidade = cidadeRepository.findById(id_c)
+				.orElseThrow(() -> new ResourceNotFoundException("Cidade não existe com id :" + id_c));
 
 		cidade.setCidade(cidadeDetails.getCidade());
 		cidade.setUf(cidadeDetails.getUf());
@@ -77,10 +77,10 @@ public class CidadeController {
 
 	}
 
-	@DeleteMapping("/{id}")
-	public ResponseEntity<Map<String, Boolean>> deleteCidade(@PathVariable Long id) {
-		Cidade cidade = cidadeRepository.findById(id)
-				.orElseThrow(() -> new ResourceNotFoundException("Cidade não existe com id :" + id));
+	@DeleteMapping("/{id_c}")
+	public ResponseEntity<Map<String, Boolean>> deleteCidade(@PathVariable Long id_c) {
+		Cidade cidade = cidadeRepository.findById(id_c)
+				.orElseThrow(() -> new ResourceNotFoundException("Cidade não existe com id :" + id_c));
 
 		cidadeRepository.delete(cidade);
 		Map<String, Boolean> response = new HashMap<>();

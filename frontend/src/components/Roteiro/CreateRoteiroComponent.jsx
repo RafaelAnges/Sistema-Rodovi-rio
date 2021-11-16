@@ -113,6 +113,7 @@ class CreateRoteiroComponent extends Component {
                                         <label>Cidade: </label>
                                         <div>
                                             <select value={this.state.cidade} onChange={this.changeCidadeHandler}>
+                                            <option>Selecione</option>
                                                 {this.state.cidades.map(
                                                     (cidades, index) => (
                                                         <option key={index}>{cidades.cidade}</option>
@@ -127,8 +128,10 @@ class CreateRoteiroComponent extends Component {
                                         <label>Modelo: </label>
                                         <div>
                                             <select  value={this.state.modelo} onChange={this.changeModeloHandler} >
+                                            <option>Selecione</option>
                                                 {this.state.veiculos.map(
                                                     (veiculos, index) =>(
+                                                        
                                                         <option key={index}>{veiculos.modelo}</option>
                                                 ))
                                                 }
@@ -143,6 +146,7 @@ class CreateRoteiroComponent extends Component {
                                         <div>
 
                                             <select value={this.state.poltrona} onChange={this.changePoltronaHandler} > 
+                                            <option>Selecione</option>
                                                 {this.state.veiculos.map((veiculos, index) => (
                                                     <option key={index}>
                                                         {veiculos.poltrona}

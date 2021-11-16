@@ -1,83 +1,97 @@
 
 import React, { Component } from 'react'
-import UsuarioService from '../../services/UsuarioService';
+import PassagemService from '../../services/PassagemService';
+import RoteiroService from '../../services/RoteiroService';
 
-class UpdateUsuarioComponent extends Component {
+class CreatePassagemComponent extends Component {
     constructor(props){
         super(props)
 
         this.state = {
-            id: this.props.match.params.id,
-            nome: '',
-            cargo: '',
-            email: '',
-            login: '',
-            senha: ''
+            roteiros:[],
+            cidadeOrigem: '',
+            cidadeDestino: '',
+            dataSaida: '',
+            horaSaida: '',
+            veiculo: '',
+            poltrona: '',
+            valor: ''
 
         }
-       this.changeNomeHandler = this.changeNomeHandler.bind(this);
-       this.changeCargoHandler = this.changeCargoHandler.bind(this);
-       this.changeEmailHandler = this.changeEmailHandler.bind(this);
-       this.changeLoginHandler = this.changeLoginHandler.bind(this);
-       this.changeSenhaHandler = this.changeSenhaHandler.bind(this);
-       this.updateUsuario = this.updateUsuario.bind(this);
+       this.changeCidadeOrigemHandler = this.changeCidadeOrigemHandler.bind(this);
+       this.changeCidadeDestinoHandler = this.changeCidadeDestinoHandler.bind(this);
+       this.changeDataSaidaHandler = this.changeDataSaidaHandler.bind(this);
+       this.changeHoraSaidaHandler = this.changeHoraSaidaHandler.bind(this);
+       this.changeVeiculoHandler = this.changeVeiculoHandler.bind(this);
+       this.changePoltronaHandler = this.changePoltronaHandler.bind(this);
+       this.changeValorHandler = this.changeValorHandler.bind(this);
+       this.savePassagem = this.savePassagem.bind(this);
     
     }
 
     componentDidMount() {
-        UsuarioService.getUsuarioById(this.state.id).then((res) => {
-            let usuario = res.data;
-            this.setState({
-                nome: usuario.nome,
-                cargo: usuario.cargo,
-                email: usuario.email,
-                login: usuario.login,
-                senha: usuario.senha
-            });
+        PassagemService.getPassagens().then((res) => {
+            this.setState({ Passagens: res.data });
+
+
         });
+
+        RoteiroService.getRoteiros().then((res) => {
+            this.setState({ roteiros: res.data });
+
+
+        })
     }
 
-    updateUsuario = (e) => {
+    savePassagem = (e) => {
         e.preventDefault();
-        let usuario = {nome: this.state.nome, cargo: this.state.cargo, email: this.state.email, login: this.state.login, senha: this.state.senha};
-        console.log('usuario => ' + JSON.stringify(usuario));
+        let passagem = {cidadeOrigem: this.state.cidadeOrigem, cidadeDestino: this.state.cidadeDestino, dataSaida: this.state.dataSaida,  horaSaida: this.state.horaSaida, veiculo: this.state.veiculo, poltrona: this.state.poltrona, valor: this.state.valor};
+        console.log('passagem => ' + JSON.stringify(passagem));
 
         
-        UsuarioService.updateUsuario(usuario, this.state.id).then(res =>{
-            this.props.history.push('/usuarios');
+        PassagemService.createPassagem(passagem).then(res =>{
+            this.props.history.push('/passagens');
         });
     }
 
    
 
-    changeNomeHandler= (event) => {
-        this.setState({nome: event.target.value});
+    changeCidadeOrigemHandler= (event) => {
+        this.setState({cidadeOrigem: event.target.value});
     }
 
-    changeCargoHandler= (event) => {
-        this.setState({cargo: event.target.value});
+    changeCidadeDestinoHandler= (event) => {
+        this.setState({cidadeDestino: event.target.value});
     }
 
-    changeEmailHandler= (event) => {
-        this.setState({email: event.target.value});
+    changeDataSaidaHandler= (event) => {
+        this.setState({dataSaida: event.target.value});
     }
 
-    changeLoginHandler= (event) => {
-        this.setState({login: event.target.value});
+    changeHoraSaidaHandler= (event) => {
+        this.setState({horaSaida: event.target.value});
     }
 
-    changeSenhaHandler= (event) => {
-        this.setState({senha: event.target.value});
+    changeVeiculoHandler= (event) => {
+        this.setState({veiculo: event.target.value});
+    }
+
+    changePoltronaHandler= (event) => {
+        this.setState({poltrona: event.target.value});
+    }
+
+    changeValorHandler= (event) => {
+        this.setState({valor: event.target.value});
     }
 
     cancel(){
-        this.props.history.push('/usuarios');
+        this.props.history.push('/passagens');
     }
 
     render(){
+        
         return(
             <div>
-                
                 <div >
         <div className="cor">
           <div className="topbar">
@@ -96,46 +110,52 @@ class UpdateUsuarioComponent extends Component {
         </div>
       </div>
 
-      <div className="container">
-
-
-
+      
+              <div className="container">
                   <div className="row">
-                      <div className="col-md-6 offset-md-3 offset-md-3">
-                          <h3 className="text-center">Aterar Usuario</h3>
+                      <div className=" col-md-6 offset-md-3 offset-md-3">
+                          <h3 className="text-center">Cadastrar Passagem</h3>
                           <div className="card-body">
                               <form className="border1">
                                   <div className="form-group">
-                                      <label>Nome: </label>
-                                      <input placeholder="Nome" name="nome" className="form-control"
-                                       value={this.state.nome} onChange={this.changeNomeHandler}/>
+                                      <label>CidadeOrigem: </label>
+                                      <input placeholder="CidadeOrigem" name="cidadeOrigem" className="form-control"
+                                       value={this.state.cidadeOrigem} onChange={this.changeCidadeOrigemHandler}/>
                                   </div>
 
                                   <div className="form-group">
-                                      <label>Cargo: </label>
-                                      <input placeholder="Cargo" name="cargo" className="form-control"
-                                       value={this.state.cargo} onChange={this.changeCargoHandler}/>
+                                        <label>CidadeDestino: </label>
+                                        <div>
+                                            <select value={this.state.cidadeDestino} onChange={this.changeCidadeDestinoHandler} > 
+                                            <option>Selecione</option>
+                                                {this.state.roteiros.map((roteiros, index) => (
+                                                    <option key={index}>
+                                                        {roteiros.cidadeDestino}
+                                                    </option>
+                                                ))}
+                                            </select>
+                                        </div>
+                                    </div>
+
+                                  <div className="form-group">
+                                      <label>DataSaida: </label>
+                                      <input placeholder="DataSaida" name="dataSaida" className="form-control"
+                                       value={this.state.dataSaida} onChange={this.changeDataSaidaHandler}/>
                                   </div>
 
                                   <div className="form-group">
-                                      <label>E-mail: </label>
-                                      <input placeholder="Email" name="email" className="form-control"
-                                       value={this.state.email} onChange={this.changeEmailHandler}/>
+                                      <label>HoraSaida: </label>
+                                      <input placeholder="HoraSaida" name="horaSaida" className="form-control"
+                                       value={this.state.horaSaida} onChange={this.changeHoraSaidaHandler}/>
                                   </div>
 
                                   <div className="form-group">
-                                      <label>Login: </label>
-                                      <input placeholder="Login" name="login" className="form-control"
-                                       value={this.state.login} onChange={this.changeLoginHandler}/>
-                                  </div>
-
-                                  <div className="form-group">
-                                      <label>Senha: </label>
-                                      <input placeholder="Senha" name="senha" className="form-control"
-                                       value={this.state.senha} onChange={this.changeSenhaHandler}/>
+                                      <label>Valor: </label>
+                                      <input placeholder="Valor" name="valor" className="form-control"
+                                       value={this.state.valor} onChange={this.changeValorHandler}/>
                                   </div>
                                   <div className="space2"></div>
-                                  <button className="btn btn-success" onClick={this.updateUsuario}>Confirmar</button>
+                                  <button className="btn btn-success" onClick={this.savePassagem}>Confirmar</button>
                                   <button className="btn btn-danger" onClick={this.cancel.bind(this)} style={{marginLeft: "10px"}}>Cancelar</button>
                               </form>
                           </div>
@@ -148,4 +168,4 @@ class UpdateUsuarioComponent extends Component {
     }
 }
 
-export default UpdateUsuarioComponent
+export default CreatePassagemComponent

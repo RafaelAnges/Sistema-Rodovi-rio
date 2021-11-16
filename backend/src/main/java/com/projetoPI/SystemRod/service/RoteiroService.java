@@ -35,11 +35,11 @@ public class RoteiroService {
 	
 	
 	public void validar(Roteiro roteiro) {
-		if(roteiro.getCidade() == null || roteiro.getCidade().trim().equals("")) {
+		if(roteiro.getCidade() == null || roteiro.getCidade().toString().equals("")) {
 			throw new ResourceNotFoundException("Informe uma CIDADE válida.");
 		}
 		
-		if(roteiro.getModelo() == null || roteiro.getModelo().trim().equals("")) {
+		if(roteiro.getModelo() == null || roteiro.getModelo().toString().equals("")) {
 			throw new ResourceNotFoundException("Informe um UF válido.");
 		}
 		

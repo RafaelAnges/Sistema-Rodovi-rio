@@ -12,16 +12,16 @@ class VeiculoService {
         return axios.post(VEICULO_API_BASE_URL, veiculo);
     }
 
-    getVeiculoById(veiculoId) {
-        return axios.get(VEICULO_API_BASE_URL + '/' + veiculoId);
+    getVeiculoById(veiculoId_v) {
+        return axios.get(VEICULO_API_BASE_URL + '/' + veiculoId_v);
     }
 
-    updateVeiculo(veiculo, veiculoId) {
-        return axios.put(VEICULO_API_BASE_URL + '/' + veiculoId, veiculo);
+    updateVeiculo(veiculo, veiculoId_v) {
+        return axios.put(VEICULO_API_BASE_URL + '/' + veiculoId_v, veiculo);
     }
 
-    deleteVeiculo(veiculoId){
-        return axios.delete(VEICULO_API_BASE_URL + '/' + veiculoId);
+    deleteVeiculo(veiculoId_v){
+        return axios.delete(VEICULO_API_BASE_URL + '/' + veiculoId_v);
     }
 
 

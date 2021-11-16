@@ -79,7 +79,7 @@ class ListRoteiroComponent extends Component {
                                 <th>Cidade</th>
                                 <th>Modelo</th>
                                 <th>Poltrona</th>
-                                <th>Opções</th>
+                                <th>Opção</th>
                             </tr>
                         </thead>
 

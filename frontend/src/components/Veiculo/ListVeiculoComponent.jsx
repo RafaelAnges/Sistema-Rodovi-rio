@@ -18,14 +18,14 @@ class ListVeiculoComponent extends Component {
 
     }
 
-    deleteVeiculo(id) {
-        VeiculoService.deleteVeiculo(id).then(res => {
-            this.setState({ veiculos: this.state.veiculos.filter(veiculo => veiculo.id !== id) });
+    deleteVeiculo(id_v) {
+        VeiculoService.deleteVeiculo(id_v).then(res => {
+            this.setState({ veiculos: this.state.veiculos.filter(veiculo => veiculo.id_v !== id_v) });
         });
     }
 
-    editVeiculo(id) {
-        this.props.history.push(`/update-veiculo/${id}`);
+    editVeiculo(id_v) {
+        this.props.history.push(`/update-veiculo/${id_v}`);
 
     }
     componentDidMount() {
@@ -90,15 +90,15 @@ class ListVeiculoComponent extends Component {
                                 {
                                     this.state.veiculos.map(
                                         veiculo =>
-                                            <tr key={veiculo.id}>
+                                            <tr key={veiculo.id_v}>
                                                 <td> {veiculo.placa} </td>
                                                 <td> {veiculo.dataCompra} </td>
                                                 <td> {veiculo.motorista} </td>
                                                 <td> {veiculo.modelo} </td>
                                                 <td> {veiculo.poltrona} </td>
                                                 <td>
-                                                    <button onClick={() => this.editVeiculo(veiculo.id)} className="btn btn-info" >Alterar</button>
-                                                    <button onClick={() => this.deleteVeiculo(veiculo.id)} className="btn btn-danger" >Delete</button>
+                                                    <button onClick={() => this.editVeiculo(veiculo.id_v)} className="btn btn-info" >Alterar</button>
+                                                    <button onClick={() => this.deleteVeiculo(veiculo.id_v)} className="btn btn-danger" >Delete</button>
 
                                                 </td>
 

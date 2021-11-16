@@ -5,6 +5,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 @Entity
@@ -27,9 +29,13 @@ public class Roteiro {
 	@Column(name = "poltrona_v")
 	private Integer poltrona;
 	
+	
 	public Roteiro() {
 		
 	}
+	
+	
+
 
 	public Roteiro(Long id, String cidade, String modelo, Integer poltrona) {
 		this.id = id;
@@ -38,33 +44,43 @@ public class Roteiro {
 		this.poltrona = poltrona;
 	}
 
+
+
+
 	public Long getId() {
 		return id;
 	}
+
 
 	public void setId(Long id) {
 		this.id = id;
 	}
 
+
 	public String getCidade() {
 		return cidade;
 	}
+
 
 	public void setCidade(String cidade) {
 		this.cidade = cidade;
 	}
 
+
 	public String getModelo() {
 		return modelo;
 	}
+
 
 	public void setModelo(String modelo) {
 		this.modelo = modelo;
 	}
 
+
 	public Integer getPoltrona() {
 		return poltrona;
 	}
+
 
 	public void setPoltrona(Integer poltrona) {
 		this.poltrona = poltrona;
@@ -72,11 +88,4 @@ public class Roteiro {
 	
 	
 
-	
-	
-	
-	
-	
-	
-	
 }

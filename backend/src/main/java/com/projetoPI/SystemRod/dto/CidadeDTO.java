@@ -7,7 +7,7 @@ import com.projetoPI.SystemRod.entities.Cidade;
 public class CidadeDTO implements Serializable{
 	private static final long serialVersionUID = 1L;
 	
-	private Long id;
+	private Long id_c;
 	private String cidade;
 	private String uf;
 	
@@ -15,24 +15,24 @@ public class CidadeDTO implements Serializable{
 		
 	}
 
-	public CidadeDTO(Long id, String cidade, String uf) {
-		this.id = id;
+	public CidadeDTO(Long id_c, String cidade, String uf) {
+		this.id_c = id_c;
 		this.cidade = cidade;
 		this.uf = uf;
 	}
 	
 	public CidadeDTO(Cidade entity) {
-		id = entity.getId();
+		id_c = entity.getId_c();
 		cidade = entity.getCidade();
 		uf = entity.getUf();
 	}
 
-	public Long getId() {
-		return id;
+	public Long getId_c() {
+		return id_c;
 	}
 
-	public void setId(Long id) {
-		this.id = id;
+	public void setId_c(Long id_c) {
+		this.id_c = id_c;
 	}
 
 	public String getCidade() {
@@ -50,7 +50,7 @@ public class CidadeDTO implements Serializable{
 	public void setUf(String uf) {
 		this.uf = uf;
 	}
-	
-	
 
+	
+	
 }

@@ -9,7 +9,7 @@ import com.projetoPI.SystemRod.entities.Veiculo;
 public class VeiculoDTO implements Serializable {
 	private static final long serialVersionUID = 1L;
 	
-	private Long id;
+	private Long id_v;
 	private LocalDate dataCompra;
 	private String placa;
 	private String motorista;
@@ -20,8 +20,8 @@ public class VeiculoDTO implements Serializable {
 		
 	}
 
-	public VeiculoDTO(Long id, LocalDate dataCompra, String placa, String motorista, String modelo, Integer poltrona) {
-		this.id = id;
+	public VeiculoDTO(Long id_v, LocalDate dataCompra, String placa, String motorista, String modelo, Integer poltrona) {
+		this.id_v = id_v;
 		this.dataCompra = dataCompra;
 		this.placa = placa;
 		this.motorista = motorista;
@@ -30,7 +30,7 @@ public class VeiculoDTO implements Serializable {
 	}
 	
 	public VeiculoDTO(Veiculo entity) {
-		id = entity.getId();
+		id_v = entity.getId_v();
 		dataCompra = entity.getDataCompra();
 		placa = entity.getPlaca();
 		motorista = entity.getMotorista();
@@ -38,12 +38,12 @@ public class VeiculoDTO implements Serializable {
 		poltrona = entity.getPoltrona();
 	}
 
-	public Long getId() {
-		return id;
+	public Long getId_v() {
+		return id_v;
 	}
 
-	public void setId(Long id) {
-		this.id = id;
+	public void setId_v(Long id_v) {
+		this.id_v = id_v;
 	}
 
 	public LocalDate getDataCompra() {
@@ -85,7 +85,6 @@ public class VeiculoDTO implements Serializable {
 	public void setPoltrona(Integer poltrona) {
 		this.poltrona = poltrona;
 	}
-
 	
 	
 

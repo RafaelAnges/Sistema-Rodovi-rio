@@ -12,16 +12,16 @@ class CidadeService {
         return axios.post(CIDADE_API_BASE_URL, cidade);
     }
 
-    getCidadeById(cidadeId) {
-        return axios.get(CIDADE_API_BASE_URL + '/' + cidadeId);
+    getCidadeById(cidadeId_v) {
+        return axios.get(CIDADE_API_BASE_URL + '/' + cidadeId_v);
     }
 
-    updateCidade(cidade, cidadeId) {
-        return axios.put(CIDADE_API_BASE_URL + '/' + cidadeId, cidade);
+    updateCidade(cidade, cidadeId_v) {
+        return axios.put(CIDADE_API_BASE_URL + '/' + cidadeId_v, cidade);
     }
 
-    deleteCidade(cidadeId){
-        return axios.delete(CIDADE_API_BASE_URL + '/' + cidadeId);
+    deleteCidade(cidadeId_v){
+        return axios.delete(CIDADE_API_BASE_URL + '/' + cidadeId_v);
     }
 
     

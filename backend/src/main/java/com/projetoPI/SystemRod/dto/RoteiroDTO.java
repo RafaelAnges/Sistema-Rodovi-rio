@@ -12,12 +12,15 @@ public class RoteiroDTO implements Serializable{
 	private String cidade;
 	private String modelo;
 	private Integer poltrona;
+
 	
 	public RoteiroDTO() {
 		
 	}
 
+
 	public RoteiroDTO(Long id, String cidade, String modelo, Integer poltrona) {
+		super();
 		this.id = id;
 		this.cidade = cidade;
 		this.modelo = modelo;
@@ -29,42 +32,49 @@ public class RoteiroDTO implements Serializable{
 		this.cidade = entity.getCidade();
 		this.modelo = entity.getModelo();
 		this.poltrona = entity.getPoltrona();
+		
 	}
+	
+
 
 	public Long getId() {
 		return id;
 	}
 
+
 	public void setId(Long id) {
 		this.id = id;
 	}
+
 
 	public String getCidade() {
 		return cidade;
 	}
 
+
 	public void setCidade(String cidade) {
 		this.cidade = cidade;
 	}
+
 
 	public String getModelo() {
 		return modelo;
 	}
 
+
 	public void setModelo(String modelo) {
 		this.modelo = modelo;
 	}
+
 
 	public Integer getPoltrona() {
 		return poltrona;
 	}
 
+
 	public void setPoltrona(Integer poltrona) {
 		this.poltrona = poltrona;
 	}
-	
-	
-	
 
 	
 	

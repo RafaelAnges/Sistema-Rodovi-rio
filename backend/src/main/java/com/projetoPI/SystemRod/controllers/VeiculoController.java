@@ -50,19 +50,19 @@ public class VeiculoController {
 		}
 	}
 	
-	@GetMapping("/{id}")
-	public ResponseEntity<Veiculo> getVeiculoById(@PathVariable Long id) {
+	@GetMapping("/{id_v}")
+	public ResponseEntity<Veiculo> getVeiculoById_v(@PathVariable Long id_v) {
 		
-		Veiculo veiculo = veiculoRepository.findById(id)
-				.orElseThrow(() -> new ResourceNotFoundException("Veiculo não existe com id :" + id));
+		Veiculo veiculo = veiculoRepository.findById(id_v)
+				.orElseThrow(() -> new ResourceNotFoundException("Veiculo não existe com id :" + id_v));
 		return ResponseEntity.ok(veiculo) ;
 	}
 	
-	@PutMapping("/{id}")
-	public ResponseEntity<Veiculo> updateVeiculo(@PathVariable Long id, @RequestBody Veiculo veiculoDetails){
+	@PutMapping("/{id_v}")
+	public ResponseEntity<Veiculo> updateVeiculo(@PathVariable Long id_v, @RequestBody Veiculo veiculoDetails){
 		
-		Veiculo veiculo = veiculoRepository.findById(id)
-				.orElseThrow(() -> new ResourceNotFoundException("Veiculo não existe com id :" + id));
+		Veiculo veiculo = veiculoRepository.findById(id_v)
+				.orElseThrow(() -> new ResourceNotFoundException("Veiculo não existe com id :" + id_v));
 		
 		veiculo.setPlaca(veiculoDetails.getPlaca());
 		veiculo.setModelo(veiculoDetails.getModelo());
@@ -76,10 +76,10 @@ public class VeiculoController {
 		
 	}
 	
-	@DeleteMapping("/{id}")
-	public ResponseEntity<Map<String, Boolean>> deleteVeiculo(@PathVariable Long id){
-		Veiculo veiculo = veiculoRepository.findById(id)
-				.orElseThrow(() -> new ResourceNotFoundException("Veiculo não existe com id :" + id));
+	@DeleteMapping("/{id_v}")
+	public ResponseEntity<Map<String, Boolean>> deleteVeiculo(@PathVariable Long id_v){
+		Veiculo veiculo = veiculoRepository.findById(id_v)
+				.orElseThrow(() -> new ResourceNotFoundException("Veiculo não existe com id :" + id_v));
 	
 	veiculoRepository.delete(veiculo);
 	Map<String, Boolean> response = new HashMap<>();

@@ -18,14 +18,14 @@ class ListCidadeComponent extends Component {
 
     }
 
-    deleteCidade(id) {
-        CidadeService.deleteCidade(id).then(res => {
-            this.setState({ cidades: this.state.cidades.filter(cidade => cidade.id !== id) });
+    deleteCidade(id_c) {
+        CidadeService.deleteCidade(id_c).then(res => {
+            this.setState({ cidades: this.state.cidades.filter(cidade => cidade.id_c !== id_c) });
         });
     }
 
-    editCidade(id) {
-        this.props.history.push(`/update-cidade/${id}`);
+    editCidade(id_c) {
+        this.props.history.push(`/update-cidade/${id_c}`);
 
     }
     componentDidMount() {
@@ -87,12 +87,12 @@ class ListCidadeComponent extends Component {
                                 {
                                     this.state.cidades.map(
                                         cidade =>
-                                            <tr key={cidade.id}>
+                                            <tr key={cidade.id_c}>
                                                 <td> {cidade.cidade} </td>
                                                 <td> {cidade.uf} </td>
                                                 <td>
-                                                    <button onClick={() => this.editCidade(cidade.id)} className="btn btn-info" >Alterar</button>
-                                                    <button onClick={() => this.deleteCidade(cidade.id)} className="btn btn-danger" >Delete</button>
+                                                    <button onClick={() => this.editCidade(cidade.id_c)} className="btn btn-info" >Alterar</button>
+                                                    <button onClick={() => this.deleteCidade(cidade.id_c)} className="btn btn-danger" >Delete</button>
 
                                                 </td>
 
