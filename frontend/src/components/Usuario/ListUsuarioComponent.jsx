@@ -15,6 +15,8 @@ class ListUsuarioComponent extends Component {
         this.addUsuario = this.addUsuario.bind(this);
         this.editUsuario = this.editUsuario.bind(this);
         this.deleteUsuario = this.deleteUsuario.bind(this);
+        this.voltar = this.voltar.bind(this);
+        
     }
 
     deleteUsuario(id){
@@ -27,6 +29,12 @@ class ListUsuarioComponent extends Component {
         this.props.history.push(`/update-usuario/${id}`);
 
     }
+
+    voltar(){
+        this.props.history.push(`/menu`);
+
+    }
+
     componentDidMount(){
         UsuarioService.getUsuarios().then((res) => {
             this.setState({ usuarios: res.data});
@@ -110,7 +118,9 @@ class ListUsuarioComponent extends Component {
                     </table>
                 </div>
                 </div>
-            
+                <div className="container">
+                <button onClick={() => this.voltar()} className="btn btn-success" >Voltar</button>
+            </div>
             </div>
         )
     }

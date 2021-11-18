@@ -106,7 +106,7 @@ class CreateRoteiroComponent extends Component {
                 <div className="container">
                     <div className="row">
                         <div className="col-md-6 offset-md-3 offset-md-3">
-                            <h3 className="text-center">Cadastrar Usuario</h3>
+                            <h3 className="text-center">Cadastrar Roteiro</h3>
                             <div className="card-body">
                                 <form className="border1">
                                     <div className="form-group">

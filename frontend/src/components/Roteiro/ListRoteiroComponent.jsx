@@ -15,6 +15,7 @@ class ListRoteiroComponent extends Component {
         this.addRoteiro = this.addRoteiro.bind(this);
         this.editRoteiro = this.editRoteiro.bind(this);
         this.deleteRoteiro = this.deleteRoteiro.bind(this);
+        this.voltar = this.voltar.bind(this);
     }
 
     deleteRoteiro(id){
@@ -25,6 +26,11 @@ class ListRoteiroComponent extends Component {
 
     editRoteiro(id){
         this.props.history.push(`/update-roteiro/${id}`);
+
+    }
+
+    voltar(){
+        this.props.history.push(`/menu`);
 
     }
     componentDidMount(){
@@ -106,7 +112,9 @@ class ListRoteiroComponent extends Component {
                     </table>
                 </div>
                 </div>
-            
+                <div className="container">
+                <button onClick={() => this.voltar()} className="btn btn-success" >Voltar</button>
+            </div>
             </div>
         )
     }

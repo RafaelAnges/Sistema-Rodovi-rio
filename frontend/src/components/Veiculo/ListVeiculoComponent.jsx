@@ -15,6 +15,7 @@ class ListVeiculoComponent extends Component {
         this.addVeiculo = this.addVeiculo.bind(this);
         this.editVeiculo = this.editVeiculo.bind(this);
         this.deleteVeiculo = this.deleteVeiculo.bind(this);
+        this.voltar = this.voltar.bind(this);
 
     }
 
@@ -26,6 +27,11 @@ class ListVeiculoComponent extends Component {
 
     editVeiculo(id_v) {
         this.props.history.push(`/update-veiculo/${id_v}`);
+
+    }
+
+    voltar() {
+        this.props.history.push(`/menu`);
 
     }
     componentDidMount() {
@@ -112,6 +118,9 @@ class ListVeiculoComponent extends Component {
                     </div>
 
                 </div>
+                <div className="container">
+                <button onClick={() => this.voltar()} className="btn btn-success" >Voltar</button>
+            </div>
             </div>
         )
     }

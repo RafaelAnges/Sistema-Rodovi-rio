@@ -15,6 +15,7 @@ class ListCidadeComponent extends Component {
         this.addCidade = this.addCidade.bind(this);
         this.editCidade = this.editCidade.bind(this);
         this.deleteCidade = this.deleteCidade.bind(this);
+        this.voltar = this.voltar.bind(this);
 
     }
 
@@ -27,6 +28,10 @@ class ListCidadeComponent extends Component {
     editCidade(id_c) {
         this.props.history.push(`/update-cidade/${id_c}`);
 
+    }
+
+    voltar(){
+        this.props.history.push('/menu');
     }
     componentDidMount() {
         CidadeService.getCidades().then((res) => {
@@ -106,6 +111,9 @@ class ListCidadeComponent extends Component {
                     </div>
 
                 </div>
+                <div className="container">
+                <button onClick={() => this.voltar()} className="btn btn-success" >Voltar</button>
+            </div>
             </div>
         )
     }

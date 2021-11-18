@@ -4,6 +4,7 @@ import { BrowserRouter, Route, Switch } from "react-router-dom";
 import CreateCidadeComponent from "./components/Cidade/CreateCidadeComponent";
 import ListCidadeComponent from "./components/Cidade/ListCidadeComponent";
 import UpdateCidadeComponent from "./components/Cidade/UpdateCidadeComponent";
+import ListFaturaComponent from "./components/Fatura/ListFaturaComponent";
 import LoginComponent from "./components/Login/LoginComponent";
 import MenuComponent from "./components/Login/MenuComponent";
 import CreatePassagemComponent from "./components/Passagem/CreatePassagemComponent";
@@ -29,6 +30,7 @@ const Routes = () => (
 
          <Switch className="container">
             <PrivateRoute path="/menu" component={MenuComponent} />
+            <PrivateRoute path="/fatura" component={ListFaturaComponent} />
             <PrivateRoute path="/add-roteiro" component={CreateRoteiroComponent} />
             <PrivateRoute path="/roteiros" component={ListRoteiroComponent} />
             <PrivateRoute path="/passagens" component={ListPassagemComponent} />

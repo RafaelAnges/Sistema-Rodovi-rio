@@ -110,7 +110,7 @@ class CreatePassagemComponent extends Component {
         </div>
       </div>
 
-      
+      <body>
               <div className="container">
                   <div className="row">
                       <div className=" col-md-6 offset-md-3 offset-md-3">
@@ -118,19 +118,19 @@ class CreatePassagemComponent extends Component {
                           <div className="card-body">
                               <form className="border1">
                                   <div className="form-group">
-                                      <label>CidadeOrigem: </label>
+                                      <label>Cidade Origem: </label>
                                       <input placeholder="CidadeOrigem" name="cidadeOrigem" className="form-control"
                                        value={this.state.cidadeOrigem} onChange={this.changeCidadeOrigemHandler}/>
                                   </div>
 
                                   <div className="form-group">
-                                        <label>CidadeDestino: </label>
+                                        <label>Cidade Destino: </label>
                                         <div>
                                             <select value={this.state.cidadeDestino} onChange={this.changeCidadeDestinoHandler} > 
                                             <option>Selecione</option>
                                                 {this.state.roteiros.map((roteiros, index) => (
                                                     <option key={index}>
-                                                        {roteiros.cidadeDestino}
+                                                        {roteiros.cidade}
                                                     </option>
                                                 ))}
                                             </select>
@@ -138,7 +138,7 @@ class CreatePassagemComponent extends Component {
                                     </div>
 
                                   <div className="form-group">
-                                      <label>DataSaida: </label>
+                                      <label>Data Saida: </label>
                                       <input placeholder="DataSaida" name="dataSaida" className="form-control"
                                        value={this.state.dataSaida} onChange={this.changeDataSaidaHandler}/>
                                   </div>
@@ -148,6 +148,50 @@ class CreatePassagemComponent extends Component {
                                       <input placeholder="HoraSaida" name="horaSaida" className="form-control"
                                        value={this.state.horaSaida} onChange={this.changeHoraSaidaHandler}/>
                                   </div>
+
+                                  <div className="form-group">
+                                        <label>Veiculo: </label>
+                                        <div>
+                                            <select value={this.state.veiculo} onChange={this.changeVeiculoHandler} > 
+                                            <option>Selecione</option>
+                                                {this.state.roteiros.map((roteiros, index) => (
+                                                    <option key={index}>
+                                                        {roteiros.modelo}
+                                                    </option>
+                                                ))}
+                                            </select>
+                                        </div>
+                                    </div>
+
+                                    <div className="form-group">
+                                        <label>Polrona: </label>
+                                        <div>
+                                            <select value={this.state.poltrona} onChange={this.changePoltronaHandler} > 
+                                            <option>Selecione</option>
+                                            <option>1</option>
+                                            <option>2</option>
+                                            <option>3</option>
+                                            <option>4</option>
+                                            <option>5</option>
+                                            <option>6</option>
+                                            <option>7</option>
+                                            <option>8</option>
+                                            <option>9</option>
+                                            <option>10</option>
+                                            <option>11</option>
+                                            <option>12</option>
+                                            <option>13</option>
+                                            <option>14</option>
+                                            <option>15</option>
+                                            <option>16</option>
+                                            <option>17</option>
+                                            <option>18</option>
+                                            <option>19</option>
+                                            <option>20</option>
+                                                
+                                            </select>
+                                        </div>
+                                    </div>
 
                                   <div className="form-group">
                                       <label>Valor: </label>
@@ -163,6 +207,7 @@ class CreatePassagemComponent extends Component {
 
                   </div>
               </div>
+              </body>
             </div>
         )
     }

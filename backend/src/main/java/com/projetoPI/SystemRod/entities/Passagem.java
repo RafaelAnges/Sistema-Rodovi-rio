@@ -24,7 +24,7 @@ public class Passagem {
 	@Column(name = "valor_p")
 	 private Double valor;
 	
-	@Column(name = "cidadeDestino_p")
+	@Column(name = "cidadDestino_p")
 	 private String cidadeDestino;
 	
 	@Column(name = "dataSaida_p")

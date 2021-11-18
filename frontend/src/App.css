@@ -1,9 +1,18 @@
 body{
-  background-color: rgb(178, 223, 235);
+  background-image: url(https://blog.conexos.com.br/wp-content/uploads/2020/10/303426-a-importancia-da-integracao-de-sistemas-para-gestao-das-empresas-1bcd16f8-852x500.jpeg);
+background-repeat: no-repeat;
+background-size: 100%;
+background-size: cover !important;
+
+
 }
 th{
   background-color:rgb(28, 101, 211) !important;
   
+}
+
+.label{
+  color: red !important;
 }
 
 td{
@@ -58,9 +67,11 @@ th{
   border: 2px solid black;
 }
 .border1{
-  border: 2px solid black;
-  
+  border: 2px solid rgb(26, 133, 175);
+  background-color: rgb(183, 222, 238) !important;
 }
+
+
 
 .center1{
   margin: 200px;
@@ -105,8 +116,9 @@ th{
 .topBarIconContainer {
   position: relative;
   cursor: pointer;
-  margin-right: 10px;
+
   color: greenyellow;
+  
 }
 
 
@@ -121,6 +133,20 @@ th{
 .cone{
   color: greenyellow;
   margin-left: 10px;
+}
+
+.labol{
+  width: 150px;
+  
+}
+
+.alto{
+  margin:20px;
+}
+
+.r{
+  border: 2px solid black;
+  margin: 50px;
 }
 
 

@@ -12,6 +12,7 @@ import com.projetoPI.SystemRod.entities.Passagem;
 import com.projetoPI.SystemRod.exception.ResourceNotFoundException;
 import com.projetoPI.SystemRod.repositories.PassagemRepository;
 
+
 @Service
 public class PassagemService {
 
@@ -30,7 +31,6 @@ public class PassagemService {
 		validar(passagem);
 		return passagemRepository.save(passagem);
 	}
-	
 	
 	public void validar(Passagem passagem) {
 		if(passagem.getCidadeOrigem() == null || passagem.getCidadeOrigem().trim().equals("")) {
@@ -52,6 +52,8 @@ public class PassagemService {
 		if(passagem.getVeiculo() == null || passagem.getVeiculo().trim().equals("")) {
 			throw new ResourceNotFoundException("Informe uma VEICULO válida.");
 		}
+		
+	
 		
 		if(passagem.getPoltrona() == null || passagem.getPoltrona().toString().equals("")) {
 			throw new ResourceNotFoundException("Informe um POLTRONA válido.");
