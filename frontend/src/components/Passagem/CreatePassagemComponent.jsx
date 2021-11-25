@@ -2,6 +2,8 @@
 import React, { Component } from 'react'
 import PassagemService from '../../services/PassagemService';
 import RoteiroService from '../../services/RoteiroService';
+import { mensagemErro } from '../toastr'
+
 
 class CreatePassagemComponent extends Component {
     constructor(props){
@@ -38,13 +40,55 @@ class CreatePassagemComponent extends Component {
 
         RoteiroService.getRoteiros().then((res) => {
             this.setState({ roteiros: res.data });
-
-
         })
     }
 
+    validar(){
+        const msgs =[]
+
+        if(!this.state.cidadeOrigem){
+            msgs.push('O campo CIDADE ORIGEM é Obrigatório')
+        }
+
+        if(!this.state.cidadeDestino){
+            msgs.push('O campo CIDADE DESTINO é Obrigatório')
+        }
+
+        if(!this.state.dataSaida){
+            msgs.push('O campo DATA SAIDA é Obrigatório')
+        }
+
+        if(!this.state.horaSaida){
+            msgs.push('O campo HORA SAIDA é Obrigatório')
+        }
+
+        if(!this.state.veiculo){
+            msgs.push('O campo VEICULO é Obrigatório')
+        }
+
+        if(!this.state.poltrona){
+            msgs.push('O campo POLTRONA é Obrigatório')
+        }
+
+        if(!this.state.valor){
+            msgs.push('O campo VALOR é Obrigatório')
+        }
+
+        return msgs;
+    }
+
+    
+
     savePassagem = (e) => {
         e.preventDefault();
+        const msgs = this.validar();
+
+        if(msgs && msgs.length > 0){
+            msgs.forEach( (msg, index ) =>{
+                mensagemErro(msg)
+            });
+            return false;
+        }
         let passagem = {cidadeOrigem: this.state.cidadeOrigem, cidadeDestino: this.state.cidadeDestino, dataSaida: this.state.dataSaida,  horaSaida: this.state.horaSaida, veiculo: this.state.veiculo, poltrona: this.state.poltrona, valor: this.state.valor};
         console.log('passagem => ' + JSON.stringify(passagem));
 
@@ -53,6 +97,7 @@ class CreatePassagemComponent extends Component {
             this.props.history.push('/passagens');
         });
     }
+    
 
    
 
@@ -154,8 +199,8 @@ class CreatePassagemComponent extends Component {
                                         <div>
                                             <select value={this.state.veiculo} onChange={this.changeVeiculoHandler} > 
                                             <option>Selecione</option>
-                                                {this.state.roteiros.map((roteiros, index) => (
-                                                    <option key={index}>
+                                                {this.state.roteiros.map((roteiros, index1) => (
+                                                    <option key={index1}>
                                                         {roteiros.modelo}
                                                     </option>
                                                 ))}

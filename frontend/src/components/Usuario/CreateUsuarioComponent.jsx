@@ -1,6 +1,8 @@
 
 import React, { Component } from 'react'
 import UsuarioService from '../../services/UsuarioService';
+import { mensagemErro } from '../toastr'
+
 
 class CreateUsuarioComponent extends Component {
     constructor(props){
@@ -22,8 +24,42 @@ class CreateUsuarioComponent extends Component {
        this.saveUsuario = this.saveUsuario.bind(this);
     }
 
+    validar(){
+        const msgs =[]
+
+        if(!this.state.nome){
+            msgs.push('O campo NOME é Obrigatório')
+        }
+
+        if(!this.state.cargo){
+            msgs.push('O campo CARGO é Obrigatório')
+        }
+
+        if(!this.state.email){
+            msgs.push('O campo EMAIL é Obrigatório')
+        }
+
+        if(!this.state.login){
+            msgs.push('O campo LOGIN é Obrigatório')
+        }
+
+        if(!this.state.senha){
+            msgs.push('O campo SENHA é Obrigatório')
+        }
+
+        return msgs;
+    }
+
     saveUsuario = (e) => {
         e.preventDefault();
+        const msgs = this.validar();
+
+        if(msgs && msgs.length > 0){
+            msgs.forEach( (msg, index ) =>{
+                mensagemErro(msg)
+            });
+            return false;
+        }
         let usuario = {nome: this.state.nome, cargo: this.state.cargo, email: this.state.email, login: this.state.login, senha: this.state.senha};
         console.log('usuario => ' + JSON.stringify(usuario));
 

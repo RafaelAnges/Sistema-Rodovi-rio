@@ -6,4 +6,5 @@ import com.projetoPI.SystemRod.entities.Roteiro;
 
 public interface RoteiroRepository extends JpaRepository<Roteiro, Long> {
 
+	
 }

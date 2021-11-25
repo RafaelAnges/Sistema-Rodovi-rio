@@ -1,6 +1,7 @@
 
 import React, { Component } from 'react'
 import VeiculoService from '../../services/VeiculoService';
+import { mensagemErro } from '../toastr'
 
 class CreateVeiculoComponent extends Component {
     constructor(props){
@@ -23,8 +24,42 @@ class CreateVeiculoComponent extends Component {
     
     }
 
+    validar(){
+        const msgs =[]
+
+        if(!this.state.placa){
+            msgs.push('O campo PLACA é Obrigatório')
+        }
+
+        if(!this.state.dataCompra){
+            msgs.push('O campo DATA COMPRA é Obrigatório')
+        }
+
+        if(!this.state.motorista){
+            msgs.push('O campo MOTORISTA é Obrigatório')
+        }
+
+        if(!this.state.modelo){
+            msgs.push('O campo MODELO é Obrigatório')
+        }
+
+        if(!this.state.poltrona){
+            msgs.push('O campo POLTRONA é Obrigatório')
+        }
+
+        return msgs;
+    }
+
     saveVeiculo = (e) => {
         e.preventDefault();
+        const msgs = this.validar();
+
+        if(msgs && msgs.length > 0){
+            msgs.forEach( (msg, index ) =>{
+                mensagemErro(msg)
+            });
+            return false;
+        }
         let veiculo = {placa: this.state.placa, dataCompra: this.state.dataCompra, motorista: this.state.motorista, modelo: this.state.modelo, poltrona: this.state.poltrona };
         console.log('veiculo => ' + JSON.stringify(veiculo));
 

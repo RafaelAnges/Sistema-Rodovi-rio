@@ -1,5 +1,6 @@
 import React from 'react';
-
+import 'toastr/build/toastr.min.js'
+import 'toastr/build/toastr.css'
 
 import './App.css';
 //import { BrowserRouter as Router, Route, Switch } from 'react-router-dom'

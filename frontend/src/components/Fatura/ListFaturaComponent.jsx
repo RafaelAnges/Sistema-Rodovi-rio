@@ -112,8 +112,8 @@ class ListFaturaComponent extends Component {
                                                 <td> {(passagem.cidadeDestino)} </td>
                                                 <td> {passagem.dataSaida} </td>
                                                 <td> {passagem.veiculo} </td>
-                                                <td> {passagem.poltrona} </td>
-                                                <td> {10 -passagem.poltrona} </td>
+                                                <td> {passagem.poltrona++} </td>
+                                                <td> {10-passagem.poltrona-passagem.poltrona} </td>
                                                 <td> {passagem.valor} </td>
                                                 
 

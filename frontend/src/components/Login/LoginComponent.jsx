@@ -2,7 +2,7 @@ import axios from 'axios';
 import React, { Component } from 'react'
 import FormGroup from './FormGroup';
 import Passo from './Passo';
-
+import { mensagemErro } from '../toastr'
 
 class LoginComponent extends Component {
     constructor(props) {
@@ -16,8 +16,10 @@ class LoginComponent extends Component {
         }
     }
 
+
     entrar = async () => {
-        const response = await axios.post('http://localhost:8080/api/v1/usuarios/autenticar', {
+        await axios
+        .post('http://localhost:8080/api/v1/usuarios/autenticar', {
             login: this.state.login,
             senha: this.state.senha
         }).then( response => {
@@ -29,7 +31,8 @@ class LoginComponent extends Component {
             
             console.log(response)
         }).catch( erro => {
-            this.setState({mensagemErro: erro.response.data})
+
+            mensagemErro(erro.response.data)
         })
 
         

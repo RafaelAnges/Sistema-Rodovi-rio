@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import CidadeService from '../../services/CidadeService';
+import { mensagemErro } from '../toastr'
 
 class UpdateCidadeComponent extends Component {
     constructor(props) {
@@ -27,8 +28,30 @@ class UpdateCidadeComponent extends Component {
         });
     }
 
+    validar(){
+        const msgs =[]
+
+        if(!this.state.cidade){
+            msgs.push('O campo CIDADE é Obrigatório')
+        }
+
+        if(!this.state.uf){
+            msgs.push('O campo UF é Obrigatório')
+        }
+
+        return msgs;
+    }
+
     updateCidade = (e) => {
         e.preventDefault();
+        const msgs = this.validar();
+
+        if(msgs && msgs.length > 0){
+            msgs.forEach( (msg, index ) =>{
+                mensagemErro(msg)
+            });
+            return false;
+        }
         let cidade = {cidade: this.state.cidade, uf: this.state.uf };
         console.log('cidade => ' + JSON.stringify(cidade));
 
