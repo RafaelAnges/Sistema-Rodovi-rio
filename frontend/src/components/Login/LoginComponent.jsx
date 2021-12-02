@@ -2,7 +2,7 @@ import axios from 'axios';
 import React, { Component } from 'react'
 import FormGroup from './FormGroup';
 import Passo from './Passo';
-import { mensagemErro } from '../toastr'
+import { mensagemErro, mensagemSucesso } from '../toastr'
 
 class LoginComponent extends Component {
     constructor(props) {
@@ -29,7 +29,7 @@ class LoginComponent extends Component {
                 this.props.history.push('/menu');
             }
             
-            console.log(response)
+            mensagemSucesso(response.data)
         }).catch( erro => {
 
             mensagemErro(erro.response.data)

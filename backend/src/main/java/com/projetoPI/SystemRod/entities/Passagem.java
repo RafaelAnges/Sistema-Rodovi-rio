@@ -2,6 +2,7 @@ package com.projetoPI.SystemRod.entities;
 
 import java.time.LocalDate;
 import java.time.LocalTime;
+import java.util.Objects;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -13,6 +14,7 @@ import javax.persistence.Table;
 @Entity
 @Table(name = "tb_passagem")
 public class Passagem {
+	
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -27,8 +29,11 @@ public class Passagem {
 	@Column(name = "cidadDestino_p")
 	 private String cidadeDestino;
 	
-	@Column(name = "dataSaida_p")
-	 private LocalDate dataSaida;
+	@Column(name = "mes_p")
+	 private String email;
+	
+	@Column(name = "ano_p")
+	 private String  name;
 	
 	@Column(name = "horaSaida_p")
 	 private LocalTime horaSaida;
@@ -43,13 +48,14 @@ public class Passagem {
 		
 	}
 
-	public Passagem(long id, String cidadeOrigem, Double valor, String cidadeDestino, LocalDate dataSaida,
+	public Passagem(long id, String cidadeOrigem, Double valor, String cidadeDestino, String email, String name,
 			LocalTime horaSaida, String veiculo, Integer poltrona) {
 		this.id = id;
 		this.cidadeOrigem = cidadeOrigem;
 		this.valor = valor;
 		this.cidadeDestino = cidadeDestino;
-		this.dataSaida = dataSaida;
+		this.email = email;
+		this.name = name;
 		this.horaSaida = horaSaida;
 		this.veiculo = veiculo;
 		this.poltrona = poltrona;
@@ -87,12 +93,20 @@ public class Passagem {
 		this.cidadeDestino = cidadeDestino;
 	}
 
-	public LocalDate getDataSaida() {
-		return dataSaida;
+	public String getEmail() {
+		return email;
 	}
 
-	public void setDataSaida(LocalDate dataSaida) {
-		this.dataSaida = dataSaida;
+	public void setEmail(String email) {
+		this.email = email;
+	}
+
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
 	}
 
 	public LocalTime getHoraSaida() {
@@ -118,6 +132,7 @@ public class Passagem {
 	public void setPoltrona(Integer poltrona) {
 		this.poltrona = poltrona;
 	}
+
 	
 	
 	

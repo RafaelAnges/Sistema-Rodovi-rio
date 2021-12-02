@@ -98,7 +98,7 @@ class ListRoteiroComponent extends Component {
                                         <td> {roteiro.modelo} </td>
                                         <td> {roteiro.poltrona} </td>
                                         <td>
-                                            
+                                        <button onClick={() => this.editRoteiro(roteiro.id)} className="btn btn-info" >Alterar</button>
                                             <button onClick = { () => this.deleteRoteiro(roteiro.id)} className="btn btn-danger" >Delete</button>
                                         
                                         </td>

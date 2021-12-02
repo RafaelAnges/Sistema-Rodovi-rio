@@ -4,6 +4,9 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Example;
+import org.springframework.data.domain.ExampleMatcher;
+import org.springframework.data.domain.ExampleMatcher.StringMatcher;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -24,7 +27,7 @@ public class PassagemService {
 		return result.stream().map(x -> new PassagemDTO(x)).collect(Collectors.toList());
 	}
 	
-
+	
 	
 	@Transactional
 	public Passagem salvarPassagem(Passagem passagem) {
@@ -41,8 +44,12 @@ public class PassagemService {
 			throw new ResourceNotFoundException("Informe um DESTINO válido.");
 		}
 		
-		if(passagem.getDataSaida() == null || passagem.getDataSaida().toString().equals("")) {
-			throw new ResourceNotFoundException("Informe uma DATA válida.");
+		if(passagem.getEmail() == null || passagem.getEmail().toString().equals("")) {
+			throw new ResourceNotFoundException("Informe um Mes válida.");
+		}
+		
+		if(passagem.getName() == null || passagem.getName().toString().equals("")) {
+			throw new ResourceNotFoundException("Informe um ANO válida.");
 		}
 		
 		if(passagem.getHoraSaida() == null || passagem.getHoraSaida().toString().equals("")) {
@@ -53,7 +60,7 @@ public class PassagemService {
 			throw new ResourceNotFoundException("Informe uma VEICULO válida.");
 		}
 		
-	
+		
 		
 		if(passagem.getPoltrona() == null || passagem.getPoltrona().toString().equals("")) {
 			throw new ResourceNotFoundException("Informe um POLTRONA válido.");

@@ -13,7 +13,8 @@ class CreatePassagemComponent extends Component {
             roteiros:[],
             cidadeOrigem: '',
             cidadeDestino: '',
-            dataSaida: '',
+            email: '',
+            name: '',
             horaSaida: '',
             veiculo: '',
             poltrona: '',
@@ -22,7 +23,8 @@ class CreatePassagemComponent extends Component {
         }
        this.changeCidadeOrigemHandler = this.changeCidadeOrigemHandler.bind(this);
        this.changeCidadeDestinoHandler = this.changeCidadeDestinoHandler.bind(this);
-       this.changeDataSaidaHandler = this.changeDataSaidaHandler.bind(this);
+       this.changeMesHandler = this.changeMesHandler.bind(this);
+       this.changeAnoHandler = this.changeAnoHandler.bind(this);
        this.changeHoraSaidaHandler = this.changeHoraSaidaHandler.bind(this);
        this.changeVeiculoHandler = this.changeVeiculoHandler.bind(this);
        this.changePoltronaHandler = this.changePoltronaHandler.bind(this);
@@ -32,11 +34,9 @@ class CreatePassagemComponent extends Component {
     }
 
     componentDidMount() {
-        PassagemService.getPassagens().then((res) => {
-            this.setState({ Passagens: res.data });
-
-
-        });
+        //PassagemService.getPassagens().then((res) => {
+          //  this.setState({ Passagens: res.data });
+      //  });
 
         RoteiroService.getRoteiros().then((res) => {
             this.setState({ roteiros: res.data });
@@ -54,8 +54,12 @@ class CreatePassagemComponent extends Component {
             msgs.push('O campo CIDADE DESTINO é Obrigatório')
         }
 
-        if(!this.state.dataSaida){
-            msgs.push('O campo DATA SAIDA é Obrigatório')
+        if(!this.state.email){
+            msgs.push('O campo MÊS é Obrigatório')
+        }
+
+        if(!this.state.name){
+            msgs.push('O campo ANO é Obrigatório')
         }
 
         if(!this.state.horaSaida){
@@ -64,7 +68,9 @@ class CreatePassagemComponent extends Component {
 
         if(!this.state.veiculo){
             msgs.push('O campo VEICULO é Obrigatório')
+        
         }
+        
 
         if(!this.state.poltrona){
             msgs.push('O campo POLTRONA é Obrigatório')
@@ -89,13 +95,14 @@ class CreatePassagemComponent extends Component {
             });
             return false;
         }
-        let passagem = {cidadeOrigem: this.state.cidadeOrigem, cidadeDestino: this.state.cidadeDestino, dataSaida: this.state.dataSaida,  horaSaida: this.state.horaSaida, veiculo: this.state.veiculo, poltrona: this.state.poltrona, valor: this.state.valor};
+        let passagem = {cidadeOrigem: this.state.cidadeOrigem, cidadeDestino: this.state.cidadeDestino, email: this.state.email, name: this.state.name,  horaSaida: this.state.horaSaida, veiculo: this.state.veiculo, poltrona: this.state.poltrona, valor: this.state.valor};
         console.log('passagem => ' + JSON.stringify(passagem));
 
         
-        PassagemService.createPassagem(passagem).then(res =>{
+        PassagemService.createPassagem(passagem).then(response =>{
+     
             this.props.history.push('/passagens');
-        });
+        })
     }
     
 
@@ -109,8 +116,12 @@ class CreatePassagemComponent extends Component {
         this.setState({cidadeDestino: event.target.value});
     }
 
-    changeDataSaidaHandler= (event) => {
-        this.setState({dataSaida: event.target.value});
+    changeMesHandler= (event) => {
+        this.setState({email: event.target.value});
+    }
+
+    changeAnoHandler= (event) => {
+        this.setState({name: event.target.value});
     }
 
     changeHoraSaidaHandler= (event) => {
@@ -171,11 +182,27 @@ class CreatePassagemComponent extends Component {
                                   <div className="form-group">
                                         <label>Cidade Destino: </label>
                                         <div>
-                                            <select value={this.state.cidadeDestino} onChange={this.changeCidadeDestinoHandler} > 
+                                            <select value={this.cidadeDestino} onChange={this.changeCidadeDestinoHandler} > 
                                             <option>Selecione</option>
-                                                {this.state.roteiros.map((roteiros, index) => (
-                                                    <option key={index}>
+                                                {this.state.roteiros.map((roteiros, id) => (
+                                                    <option key={id} >
                                                         {roteiros.cidade}
+                                                    </option>
+                                                    
+                                                    
+                                                ))}
+                                            </select>
+                                        </div>
+                                    </div>
+
+                                    <div className="form-group">
+                                        <label>Veiculo: </label>
+                                        <div>
+                                            <select value={this.state.veiculo} onChange={this.changeVeiculoHandler} > 
+                                            <option>Selecione</option>
+                                                {this.state.roteiros.map((roteiros, id) => (
+                                                    <option key={id} >
+                                                        {roteiros.modelo}
                                                     </option>
                                                 ))}
                                             </select>
@@ -183,9 +210,15 @@ class CreatePassagemComponent extends Component {
                                     </div>
 
                                   <div className="form-group">
-                                      <label>Data Saida: </label>
-                                      <input placeholder="DataSaida" name="dataSaida" className="form-control"
-                                       value={this.state.dataSaida} onChange={this.changeDataSaidaHandler}/>
+                                      <label>Mês: </label>
+                                      <input placeholder="Mes" name="mes" className="form-control"
+                                       value={this.state.email} onChange={this.changeMesHandler}/>
+                                  </div>
+
+                                  <div className="form-group">
+                                      <label>Ano: </label>
+                                      <input placeholder="Ano" name="ano" className="form-control"
+                                       value={this.state.name} onChange={this.changeAnoHandler}/>
                                   </div>
 
                                   <div className="form-group">
@@ -194,22 +227,10 @@ class CreatePassagemComponent extends Component {
                                        value={this.state.horaSaida} onChange={this.changeHoraSaidaHandler}/>
                                   </div>
 
-                                  <div className="form-group">
-                                        <label>Veiculo: </label>
-                                        <div>
-                                            <select value={this.state.veiculo} onChange={this.changeVeiculoHandler} > 
-                                            <option>Selecione</option>
-                                                {this.state.roteiros.map((roteiros, index1) => (
-                                                    <option key={index1}>
-                                                        {roteiros.modelo}
-                                                    </option>
-                                                ))}
-                                            </select>
-                                        </div>
-                                    </div>
+                                  
 
                                     <div className="form-group">
-                                        <label>Polrona: </label>
+                                        <label>Poltrona: </label>
                                         <div>
                                             <select value={this.state.poltrona} onChange={this.changePoltronaHandler} > 
                                             <option>Selecione</option>

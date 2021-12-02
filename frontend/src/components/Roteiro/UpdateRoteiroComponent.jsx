@@ -1,54 +1,111 @@
-
 import React, { Component } from 'react'
-import PassagemService from '../../services/PassagemService';
+import CidadeService from '../../services/CidadeService';
+import RoteiroService from '../../services/RoteiroService';
+import VeiculoService from '../../services/VeiculoService';
 
-class ListPassagemComponent extends Component {
-
+class UpdateRoteiroComponent extends Component {
     constructor(props) {
         super(props)
 
         this.state = {
-            passagens: []
+            id: this.props.match.params.id,
+            cidade: '',
+            modelo: '',
+            poltrona: '',
+            cidades: [],
+            veiculos: []
 
 
         }
-        this.addPassagem = this.addPassagem.bind(this);
-        // this.editUsuario = this.editUsuario.bind(this);
-        this.deletePassagem = this.deletePassagem.bind(this);
-        this.voltar = this.voltar.bind(this);
+
+
+        this.changeCidadeHandler = this.changeCidadeHandler.bind(this);
+        this.changeModeloHandler = this.changeModeloHandler.bind(this);
+        this.changePoltronaHandler = this.changePoltronaHandler.bind(this);
+
+        this.updateRoteiro = this.updateRoteiro.bind(this);
+
+
     }
 
-    deletePassagem(id) {
-        PassagemService.deletePassagem(id).then(res => {
-            this.setState({ passagens: this.state.passagens.filter(passagem => passagem.id !== id) });
-        });
-    }
-
-    voltar() {
-        this.props.history.push('/menu');
-    }
-
-    //editUsuario(id){
-    //    this.props.history.push(`/update-usuario/${id}`);
-
-    //}
 
     componentDidMount() {
-        PassagemService.getPassagens().then((res) => {
-            this.setState({ passagens: res.data });
+
+        CidadeService.getCidades().then((res) => {
+            this.setState({ cidades: res.data });
+
+
+        });
+
+        VeiculoService.getVeiculos().then((res) => {
+            this.setState({ veiculos: res.data });
+
+
         })
 
         
+        CidadeService.getCidadeById(this.state.id).then((res) => {
+            let cidade = res.data;
+            this.setState({
+                cidade: cidade.cidade
+            });
+        });
+
+        VeiculoService.getVeiculoById(this.state.id).then((res) => {
+            let veiculo = res.data
+            this.setState({
+                modelo: veiculo.modelo,
+                poltrona: veiculo.poltrona,
+            });
+        });
+
+
+
+
+
+
     }
 
 
-    addPassagem() {
-        this.props.history.push('/add-passagem');
+
+    updateRoteiro = (e) => {
+        e.preventDefault();
+        let roteiro = { cidade: this.state.cidade, modelo: this.state.modelo, poltrona: this.state.poltrona };
+        console.log('roteiro => ' + JSON.stringify(roteiro));
+
+
+        RoteiroService.updateRoteiro(roteiro, this.state.id).then(res => {
+            this.props.history.push('/roteiros');
+        });
     }
+
+
+
+    changeCidadeHandler = (event) => {
+        this.setState({ cidade: event.target.value });
+    }
+
+    changeModeloHandler = (event) => {
+        this.setState({ modelo: event.target.value });
+    }
+
+    changePoltronaHandler = (event) => {
+        this.setState({ poltrona: event.target.value });
+    }
+
+
+
+    cancel() {
+        this.props.history.push('/roteiros');
+    }
+
+
 
 
     render() {
+
         return (
+
             <div>
                 <div >
                     <div className="cor">
@@ -68,67 +125,75 @@ class ListPassagemComponent extends Component {
                     </div>
                 </div>
 
+
                 <div className="container">
-                    <h2 className="text-center">Pesquisar Passagens </h2>
                     <div className="row">
-
-                        <button className="btn btn-primary" onClick={this.addPassagem}>
-                            Cadastrar Passagem
-                        </button>
-                        <div className="space"></div>
-                    </div>
-                    <div className="row">
-                        <table className="table table-striped table-bordered">
-
-                            <thead>
-                                <tr>
-                                    <th>CidadeOrigem</th>
-                                    <th>CidadeDestino</th>
-                                    <th>Mês</th>
-                                    <th>Ano</th>
-                                    <th>HoraSaida</th>
-                                    <th>Veiculo</th>
-                                    <th>Poltrona</th>
-                                    <th>Valor</th>
-                                    <th>Opção</th>
-                                </tr>
-                            </thead>
-
-                            <tbody>
-                                {
-                                    this.state.passagens.map(
-                                        passagem =>
-                                            <tr key={passagem.id}>
-                                                <td> {passagem.cidadeOrigem} </td>
-                                                <td> {passagem.cidadeDestino} </td>
-                                                <td> {passagem.email} </td>
-                                                <td> {passagem.name} </td>
-                                                <td> {passagem.horaSaida} </td>
-                                                <td> {passagem.veiculo} </td>
-                                                <td> {passagem.poltrona} </td>
-                                                <td> {passagem.valor} </td>
-                                                <td>
-                                                    {/*<button onClick = { () => this.editPassagem(passagem.id)} className="btn btn-info" >Alterar</button>*/}
-
-                                                    <button onClick={() => this.deletePassagem(passagem.id)} className="btn btn-danger" >Delete</button>
-
-                                                </td>
-
-                                            </tr>
-                                    )
-                                }
+                        <div className="col-md-6 offset-md-3 offset-md-3">
+                            <h3 className="text-center">Cadastrar Roteiro</h3>
+                            <div className="card-body">
+                                <form className="border1">
+                                    <div className="form-group">
+                                        <label>Cidade: </label>
+                                        <div>
+                                            <select value={this.state.cidade} onChange={this.changeCidadeHandler}>
+                                                <option>Selecione</option>
+                                                {this.state.cidades.map(
+                                                    (cidades, index) => (
+                                                        <option key={index}>{cidades.cidade}</option>
+                                                    ))
+                                                }
+                                            </select>
+                                        </div>
+                                    </div>
 
 
-                            </tbody>
-                        </table>
+                                    <div className="form-group">
+                                        <label>Modelo: </label>
+                                        <div>
+                                            <select value={this.state.modelo} onChange={this.changeModeloHandler} >
+                                                <option>Selecione</option>
+                                                {this.state.veiculos.map(
+                                                    (veiculo, index) => (
+
+                                                        <option key={index}>{veiculo.modelo}</option>
+                                                    ))
+                                                }
+                                            </select>
+                                        </div>
+
+                                    </div>
+
+                                    <div className="form-group">
+                                        <label>Poltrona: </label>
+
+                                        <div>
+
+                                            <select value={this.state.poltrona} onChange={this.changePoltronaHandler} >
+                                                <option>Selecione</option>
+                                                {this.state.veiculos.map((veiculo, index) => (
+                                                    <option key={index}>
+                                                        {veiculo.poltrona}
+                                                    </option>
+                                                ))}
+                                            </select>
+                                        </div>
+
+
+                                    </div>
+
+                                    <div className="space2"></div>
+                                    <button className="btn btn-success" onClick={this.updateRoteiro}>Confirmar</button>
+                                    <button className="btn btn-danger" onClick={this.cancel.bind(this)} style={{ marginLeft: "10px" }}>Cancelar</button>
+                                </form>
+                            </div>
+
+                        </div>
+
                     </div>
                 </div>
-                <div className="container">
-                    <button onClick={() => this.voltar()} className="btn btn-success" >Voltar</button>
-                </div>
-            </div>
+            </div >
         )
     }
 }
 
-export default ListPassagemComponent
+export default UpdateRoteiroComponent

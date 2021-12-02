@@ -11,6 +11,7 @@ import CreatePassagemComponent from "./components/Passagem/CreatePassagemCompone
 import ListPassagemComponent from "./components/Passagem/ListPassagemComponent";
 import CreateRoteiroComponent from "./components/Roteiro/CreateRoteiroComponent";
 import ListRoteiroComponent from "./components/Roteiro/ListRoteiroComponent";
+import UpdateRoteiroComponent from "./components/Roteiro/UpdateRoteiroComponent";
 import CreateUsuarioComponent from "./components/Usuario/CreateUsuarioComponent";
 import ListUsuarioComponent from "./components/Usuario/ListUsuarioComponent";
 import UpdateUsuarioComponent from "./components/Usuario/UpdateUsuarioComponent";
@@ -33,6 +34,7 @@ const Routes = () => (
             <PrivateRoute path="/fatura" component={ListFaturaComponent} />
             <PrivateRoute path="/add-roteiro" component={CreateRoteiroComponent} />
             <PrivateRoute path="/roteiros" component={ListRoteiroComponent} />
+            <PrivateRoute path="/update-roteiro/:id" component={UpdateRoteiroComponent} />
             <PrivateRoute path="/passagens" component={ListPassagemComponent} />
             <PrivateRoute path="/add-passagem" component={CreatePassagemComponent} />
 

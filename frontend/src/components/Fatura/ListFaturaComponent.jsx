@@ -1,66 +1,77 @@
 
-import React, { Component } from 'react'
+
+import React from 'react'
+import { withRouter } from 'react-router-dom';
+import Card from '../Fatura/Card'
+import FormGroup from '../Login/FormGroup';
+import SelectMenu from './selectMenu';
+import FaturaTable from './faturaTable';
 import PassagemService from '../../services/PassagemService';
 
-class ListFaturaComponent extends Component {
+class ListFaturaComponent extends React.Component {
 
-    constructor(props) {
-        super(props)
+
+
+
+    constructor() {
+        super();
+
 
         this.state = {
-            passagens:[],
-            inicio:'',
-            fim: ''
-
+            name: '',
+            email: '',
+            passagens: []
 
         }
 
-       
 
-        this.changeInicioHandler = this.changeInicioHandler.bind(this);
-       this.changeFimHandler = this.changeFimHandler.bind(this);
         this.voltar = this.voltar.bind(this);
+
     }
 
-    savePassagem = (e) => {
-        e.preventDefault();
-        let passagem = {cidadeOrigem: this.state.cidadeOrigem, cidadeDestino: this.state.cidadeDestino, dataSaida: this.state.dataSaida,  horaSaida: this.state.horaSaida, veiculo: this.state.veiculo, poltrona: this.state.poltrona, valor: this.state.valor};
-        console.log('passagem => ' + JSON.stringify(passagem));
 
-        
-        PassagemService.createPassagem(passagem).then(res =>{
-            this.props.history.push('/passagens');
-        });
-    }
+
 
     voltar() {
         this.props.history.push('/menu');
     }
 
-    //editUsuario(id){
-    //    this.props.history.push(`/update-usuario/${id}`);
+    buscar = () => {
+        const passagemFiltro = {
+            name: this.state.name,
+            email: this.state.email
+        }
 
-    //}
-
-    componentDidMount() {
-        PassagemService.getPassagens().then((res) => {
-            this.setState({ passagens: res.data });
-
-
-        })
+        PassagemService
+            .consultar(passagemFiltro)
+            .then(resposta => {
+                this.setState({ passagens: resposta.data })
+            }).catch(error => {
+                console.log(error)
+            })
     }
-
-    changeInicioHandler= (event) => {
-        this.setState({inicio: event.target.value});
-    }
-
-    changeFimHandler= (event) => {
-        this.setState({fim: event.target.value});
-    }
-
-
 
     render() {
+
+
+
+        const meses = [
+            { label: 'Selecione...', value: '' },
+            { label: 'Janeiro', value: 1 },
+            { label: 'Fevereiro', value: 2 },
+            { label: 'Março', value: 3 },
+            { label: 'Abril', value: 4 },
+            { label: 'Maio', value: 5 },
+            { label: 'Junho', value: 6 },
+            { label: 'Julho', value: 7 },
+            { label: 'Agosto', value: 8 },
+            { label: 'Setembro', value: 9 },
+            { label: 'Outubro', value: 10 },
+            { label: 'Novembro', value: 11 },
+            { label: 'Dezembro', value: 12 },
+
+        ]
+
         return (
             <div>
                 <div >
@@ -82,55 +93,75 @@ class ListFaturaComponent extends Component {
                 </div>
 
                 <div className="container">
-                    <h2 className="text-center">Consultar Faturas </h2>
-                    <div className="row">
-                        
-                        <div className="space"></div>
-                    </div>
-                    
-                    <div className="row">
-                        <table className="table table-striped table-bordered">
+                    <Card title="Consultar Faturas">
+                        <div className="row">
+                            <dir className="col-md-6">
+                                <div className="bs-component">
+                                    <FormGroup htmlFor="inputAno" label="Ano: *">
+                                        <input type="text"
+                                            className="form-control"
+                                            id="inputAno"
+                                            value={this.state.name}
+                                            onChange={e => this.setState({ name: e.target.value })}
+                                            placeholder="Digite o Ano" />
+                                    </FormGroup>
+                                    <FormGroup htmlFor="inputMes" label="Mês: ">
+                                        <SelectMenu id="inputMes"
+                                            value={this.state.email}
+                                            onChange={e => this.setState({ email: e.target.value })}
+                                            className="form-control"
+                                            lista={meses} />
+                                    </FormGroup>
 
-                            <thead>
-                                <tr>
-                                    
-                                    <th>Cidade de Destino</th>
-                                    <th>Data de Saida</th>
-                                    <th>Veiculo em Rota</th>
-                                    <th>Passagem Vendidas</th>
-                                    <th>Passagem Restam</th>
-                                    <th>Valores</th>
-                                </tr>
-                            </thead>
+                                    <button onClick={this.buscar} type="button" className="btn btn-success">Buscar</button>
 
-                            <tbody>
-                                {
-                                    this.state.passagens.map(
-                                        passagem =>
-                                            <tr key={passagem.id}>
-                                                
-                                                <td> {(passagem.cidadeDestino)} </td>
-                                                <td> {passagem.dataSaida} </td>
-                                                <td> {passagem.veiculo} </td>
-                                                <td> {passagem.poltrona++} </td>
-                                                <td> {10-passagem.poltrona-passagem.poltrona} </td>
-                                                <td> {passagem.valor} </td>
-                                                
+                                </div>
+                            </dir>
+                        </div>
+                        <br />
+                        <div className="row">
+                            <div className="col-md-12">
+                                <div className="bs-component">
+                                    <FaturaTable passagens={this.state.passagens} />
+                                </div>
 
-                                            </tr>
-                                    )
-                                }
+                            </div>
 
-                            </tbody>
-                        </table>
+                        </div>
+                    </Card>
+                    <div className="container">
+                        <button onClick={() => this.voltar()} className="btn btn-success" >Voltar</button>
                     </div>
                 </div>
-                <div className="container">
-                    <button onClick={() => this.voltar()} className="btn btn-success" >Voltar</button>
-                </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
             </div>
         )
     }
 }
 
-export default ListFaturaComponent
+export default withRouter(ListFaturaComponent);

@@ -1,11 +1,22 @@
 import axios from 'axios';
 
-const  PAISSAGEM_API_BASE_URL = "http://localhost:8080/api/v1/passagens";
+const PAISSAGEM_API_BASE_URL = "http://localhost:8080/api/v1/passagens";
 
 class PassagemService {
 
     getPassagens() {
         return axios.get(PAISSAGEM_API_BASE_URL);
+    }
+
+   
+
+    consultar(passagemFiltro) {
+        let params = `?name=${passagemFiltro.name}`
+
+        if (passagemFiltro.email) {
+            params = `${params}&email=${passagemFiltro.email}`
+        }
+        return axios.get("http://localhost:8080/api/v1/passagens/filter/custom" + params);
     }
 
     createPassagem(passagem) {
@@ -17,10 +28,10 @@ class PassagemService {
     }
 
     //updatePassagem(passagem, passagemId) {
-      //  return axios.put(PAISSAGEM_API_BASE_URL + '/' + passagemId, passagem);
+    //  return axios.put(PAISSAGEM_API_BASE_URL + '/' + passagemId, passagem);
     //}
 
-    deletePassagem(passagemId){
+    deletePassagem(passagemId) {
         return axios.delete(PAISSAGEM_API_BASE_URL + '/' + passagemId);
     }
 
