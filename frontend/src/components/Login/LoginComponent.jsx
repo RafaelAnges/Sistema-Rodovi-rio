@@ -41,7 +41,7 @@ class LoginComponent extends Component {
     render() {
         return (
             
-            
+            <div className="center">
 
       <div className="container">
                 <div className="row">
@@ -81,6 +81,7 @@ class LoginComponent extends Component {
                     </div>
 
                 </div>
+            </div>
             </div>
         )
     }

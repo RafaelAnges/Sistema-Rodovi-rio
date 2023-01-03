@@ -31,6 +31,8 @@ class PassagemService {
     //  return axios.put(PAISSAGEM_API_BASE_URL + '/' + passagemId, passagem);
     //}
 
+    
+
     deletePassagem(passagemId) {
         return axios.delete(PAISSAGEM_API_BASE_URL + '/' + passagemId);
     }
